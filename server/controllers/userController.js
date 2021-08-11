@@ -32,7 +32,7 @@ class userController{
     static async register(req,res){
         console.log(req.body)
         try{
-            const {name,email,password,salt,birthdate,gender,type} =req.body
+            const {name,email,password,state,birthdate,gender,type} =req.body
             let mail = email.toLowerCase();
             let findEmail = await User.findOne({
                 where:{email}
@@ -46,7 +46,7 @@ class userController{
             }else{
                 // console.log("oke")
                 let user = await User.create({
-                    name,email:mail,password,salt,birthdate,gender,type
+                    name,email:mail,password,state,birthdate,gender,type
                 })
                 res.status(201).json(user)
             }
@@ -86,7 +86,7 @@ class userController{
     static async update(req,res){
         try{
         let idP = +req.params.id;
-        const {name,email,salt,birthdate,gender,avatar,type} =req.body;
+        const {name,email,state,birthdate,gender,avatar,type} =req.body;
         let mail = email.toLowerCase();
         let findEmail = await User.findAll({
             where:{id:{[Op.ne]:idP}}
@@ -107,7 +107,7 @@ class userController{
             })
         }else{
             let result =await User.update({
-                name,email:mail,salt,birthdate,gender,avatar,type
+                name,email:mail,state,birthdate,gender,avatar,type
             },{
                 where:{id:idP}
             })

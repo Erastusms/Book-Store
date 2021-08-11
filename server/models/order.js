@@ -26,8 +26,24 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING(15),
     address: DataTypes.STRING(500),
     status: DataTypes.STRING(15),
-    user_id: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER
   }, {
+    // hooks:{
+    //   beforeCreate(order,options){
+    //     console.log('bc1')
+    //     if(+total_qty>=2){
+    //       order.discount = (+order.subtotal)-(+order.subtotal*5/100)
+    //     }else{
+    //       order.discount=0;
+    //     }
+    //     console.log('bc2')
+    //     order.tax = (+order.subtotal)*10/100;
+    //     order.total_due = (+order.subtotal)+(+order.discount)+(+order.tax)
+    //     order.payt_trx_number=9999+(+order.total_qty)+(+order.total_due)
+    //     order.status="open"
+    //     console.log('bc3')
+    //   }
+    // },
     sequelize,
     modelName: 'Order',
   });

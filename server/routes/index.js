@@ -5,8 +5,10 @@ router.get('/',(req,res)=>{
 })
 const userRouter = require('./user')
 const prodRoute = require('./product')
+const orderRoute = require('./order')
 
 router.use('/users',userRouter)
 router.use('/products',prodRoute)
+router.use('/orders',orderRoute)
 
 module.exports = router
