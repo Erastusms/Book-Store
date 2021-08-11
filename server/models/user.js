@@ -12,16 +12,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // User.hasMany(models.Product)
-      // User.hasMany(models.Shopping_Cart)
-      // User.hasMany(models.Order)
+      User.hasMany(models.Product)
+      User.hasMany(models.Shopping_Cart)
+      User.hasMany(models.Order)
     }
   };
   User.init({
     name: DataTypes.STRING(20),
     email: DataTypes.STRING(55),
     password: DataTypes.STRING,
-    salt: DataTypes.STRING,
+    state: DataTypes.STRING,
     birthdate: DataTypes.DATE,
     gender: DataTypes.STRING(6),
     avatar: DataTypes.STRING,
@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks:{
       beforeCreate(user,options){
-        console.log("befcreate")
         user.avatar=' ';
         user.password = encrypter(user.password);
       }
