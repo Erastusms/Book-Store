@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const {encrypter} =require('../helpers/endes')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -20,12 +21,18 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING(20),
     email: DataTypes.STRING(55),
     password: DataTypes.STRING,
-    sat: DataTypes.STRING,
+    state: DataTypes.STRING,
     birthdate: DataTypes.DATE,
     gender: DataTypes.STRING(6),
     avatar: DataTypes.STRING,
     type: DataTypes.STRING(10)
   }, {
+    hooks:{
+      beforeCreate(user,options){
+        user.avatar=' ';
+        user.password = encrypter(user.password);
+      }
+    },
     sequelize,
     modelName: 'User',
   });

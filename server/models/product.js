@@ -24,13 +24,20 @@ module.exports = (sequelize, DataTypes) => {
     expire: DataTypes.DATE,
     weight: DataTypes.INTEGER,
     category: DataTypes.STRING(50),
-    brand: DataTypes.STRING(50),
+    publisher: DataTypes.STRING(50),
     condition: DataTypes.STRING(15),
     total_sold: DataTypes.INTEGER,
     rating: DataTypes.INTEGER,
     views: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER
   }, {
+    hooks:{
+      beforeCreate(product,options){
+        product.views=0;
+        product.rating=0;
+        product.total_sold=0;
+      }
+    },
     sequelize,
     modelName: 'Product',
   });

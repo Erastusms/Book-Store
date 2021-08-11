@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       expire: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       weight: {
         type: Sequelize.INTEGER
@@ -44,7 +44,7 @@ module.exports = {
       views: {
         type: Sequelize.INTEGER
       },
-      user_id: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

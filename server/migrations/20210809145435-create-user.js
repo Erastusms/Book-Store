@@ -17,7 +17,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      sat: {
+      state: {
         type: Sequelize.STRING
       },
       birthdate: {
