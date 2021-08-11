@@ -1,7 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-
+import axios from 'axios'
+import Swal from 'sweetalert2'
 export default function Login() {
+//   const [state, setState] = useState({
+//     email: "",
+//     password: ""
+// })
+
+// const submitHandler = e => {
+
+//     // e.preventDefault()
+//     // loginAxios()
+//     // login(true)
+//     userLogin(true)
+// }
+
+// const loginAxios = async () => {
+//     try {
+//         const result = await axios({
+//             method: 'POST',
+//             url: "http://localhost:3000/users/login",
+//             data: state
+//         })
+//         // const access_token = result.data["access_token"]
+//         console.log(result.data)
+//         userLogin(true)
+//         // getToken(access_token)
+//     } catch (err) {
+//         Swal.fire("ERROR", `${err}`, "error")
+//     }
+// }
+
   return (
     <div className="container-fluid">
       <div class="row justify-content-center mt-5 pt-5">
@@ -26,6 +56,7 @@ export default function Login() {
               {/* <label>Email</label> */}
               <input
                 type="email"
+                required
                 className="form-control"
                 placeholder="Email"
               />
@@ -35,13 +66,15 @@ export default function Login() {
               {/* <label>Password</label> */}
               <input
                 type="password"
+                required
                 className="form-control"
                 placeholder="Password"
               />
             </div>
             <div className="mb-3">
               <button className="btn btn-block btn-primary rounded">
-                Login
+                <Link to="/homepage">Login</Link>
+                {/* Login */}
               </button>
             </div>
           </div>
