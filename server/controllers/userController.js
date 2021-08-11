@@ -17,6 +17,18 @@ class userController{
         }
     }
 
+    static async showById(req,res){
+        try{
+            let id = +req.params.id;
+            let users = await User.findOne({
+                where:{id}
+            })
+            res.status(200).json(users)
+        }catch(err){
+            res.status(500).json(err)
+        }
+    }
+
     static async register(req,res){
         console.log(req.body)
         try{
@@ -140,6 +152,21 @@ class userController{
                     message:"password is Invalid!"
                 })
             }
+        }catch(err){
+            res.status(500).json(err)
+        }
+    }
+
+    static async updateAva(req,res){
+        try{
+            let id = +req.params.id;
+            let avatar = req.files.image[0].path;
+            let result=await User.update({
+                avatar
+            },{
+                where:{id}
+            })
+            res.status(200).json(result)
         }catch(err){
             res.status(500).json(err)
         }

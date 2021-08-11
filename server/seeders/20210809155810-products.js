@@ -25,6 +25,7 @@ module.exports = {
           total_sold:0,
           rating:0,
           views:0,
+          UserId:1,
           createdAt:new Date(),
           updatedAt:new Date()
         },{
@@ -40,6 +41,7 @@ module.exports = {
           total_sold:0,
           rating:0,
           views:0,
+          UserId:1,
           createdAt:new Date(),
           updatedAt:new Date()
         }

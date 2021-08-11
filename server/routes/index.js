@@ -4,9 +4,9 @@ router.get('/',(req,res)=>{
     res.status(200).json('Home')
 })
 const userRouter = require('./user')
-// const prodRoute = require('./product')
+const prodRoute = require('./product')
 
 router.use('/users',userRouter)
-// router.use('/product',prodRoute)
+router.use('/products',prodRoute)
 
 module.exports = router
