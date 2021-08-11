@@ -1,5 +1,5 @@
 // export { LandingPage } from "LandingPage";
-import LandingPage from "./LandingPage";
 import HomePage from "./HomePage";
+import LandingPage from "./LandingPage";
 
-export { LandingPage, HomePage };
+export { HomePage, LandingPage };

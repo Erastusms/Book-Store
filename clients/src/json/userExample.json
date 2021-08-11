@@ -1,0 +1,12 @@
+{
+    "user": [
+        {
+            "id": 1,
+            "username": "Suparman",
+            "birthdate": "22 Jul 2021",
+            "age": 17,
+            "gender": "Male",
+            "image": "https://cdn1-production-images-kly.akamaized.net/P85Ddv6JF2FbVJeoCgCelmhtt4U=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1439641/original/042027300_1482131661-reddit.jpg"
+        }
+    ]
+}

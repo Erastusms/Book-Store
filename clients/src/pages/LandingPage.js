@@ -1,12 +1,23 @@
-import React, { Component } from 'react'
-import Header from 'components/Header'
-import Login from 'components/Login'
-export default class LandingPage extends Component {
-    render() {
-        return (
-            <div>
-                <Header />
-            </div>
-        )
-    }
+import React, { Component } from "react";
+import {Login, Register} from "components";
+import HomePage from "./HomePage"
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+export default function LandingPage({login, userLogin}) {
+  
+    return (
+        <Router>
+          <Route exact path="/">
+            <Login login={login} userLogin={userLogin} />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          {/* <Route exact path="/homepage">
+            <HomePage />
+          </Route> */}
+          
+        </Router>
+    );
+  
 }
