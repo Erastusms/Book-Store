@@ -17,7 +17,7 @@ class orderController{
 
     static async showById(req,res){
         try{
-            let UserId = +req.params.UserId;
+            let UserId = +req.UserData.id;
             let orders = await Order.findOne({
                 where:{UserId}
             })
@@ -29,7 +29,8 @@ class orderController{
 
     static async create(req,res){
         try{
-            const{name,subtotal,total_qty,city,address,UserId}=req.body
+            const UserId = +req.UserData.id
+            const{name,subtotal,total_qty,city,address}=req.body
             let orderName = name;
             console.log(orderName)
             let findName = await Order.findAll()
@@ -62,17 +63,14 @@ class orderController{
     static async update(req,res){
         try{
             let idO = +req.params.id;
-            const {name,subtotal,total_qty,city,address,UserId}=req.body
-            console.log('1')
-
+            const UserId = +req.UserData.id
+            const {name,subtotal,total_qty,city,address}=req.body
             let findName = await Order.findAll({
                 where:{id:{[Op.ne]:idO}}
             })
-            console.log('ok')
             let fN = findName.map(fn=>{
                 return fn.name
             })
-            console.log('2')
             let flag =0;
             fN.forEach(fn=>{
                 if(fn===name){

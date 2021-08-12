@@ -35,7 +35,8 @@ class prodController{
 
     static async create(req,res){
         try{
-            const{name,desc,price,stock,expire,weight,category,publisher,condition,UserId}=req.body
+            const UserId=+req.UserData.id
+            const{name,desc,price,stock,expire,weight,category,publisher,condition}=req.body
             let products = await Product.create({
                 name,desc,price,stock,expire,weight,category,publisher,condition,UserId
             })
