@@ -28,22 +28,34 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING(15),
     UserId: DataTypes.INTEGER
   }, {
-    // hooks:{
-    //   beforeCreate(order,options){
-    //     console.log('bc1')
-    //     if(+total_qty>=2){
-    //       order.discount = (+order.subtotal)-(+order.subtotal*5/100)
-    //     }else{
-    //       order.discount=0;
-    //     }
-    //     console.log('bc2')
-    //     order.tax = (+order.subtotal)*10/100;
-    //     order.total_due = (+order.subtotal)+(+order.discount)+(+order.tax)
-    //     order.payt_trx_number=9999+(+order.total_qty)+(+order.total_due)
-    //     order.status="open"
-    //     console.log('bc3')
-    //   }
-    // },
+    hooks:{
+      beforeCreate(order,options){
+        let qty = +order.total_qty
+          if(qty>=2){
+            order.discount = (+order.subtotal*5/100)
+          }else{
+            order.discount=0;
+          }
+        
+          order.tax = ((+order.subtotal)-(+order.discount))*10/100;
+          order.total_due =(+order.subtotal)-(+order.discount)+(+order.tax)
+          order.payt_trx_number=`${order.UserId}9999${order.total_qty}${order.total_due}`
+          order.status='open'
+      },
+        beforeUpdate(order,options){
+          let qty = +order.total_qty
+          if(qty>=2){
+            order.discount = (+order.subtotal*5/100)
+          }else{
+            order.discount=0;
+          }
+        
+          order.tax = ((+order.subtotal)-(+order.discount))*10/100;
+          order.total_due =(+order.subtotal)-(+order.discount)+(+order.tax)
+          order.payt_trx_number=`${order.UserId}9999${order.total_qty}${order.total_due}`
+          order.status='open'
+        }
+    },
     sequelize,
     modelName: 'Order',
   });

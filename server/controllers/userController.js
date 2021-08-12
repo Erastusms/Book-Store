@@ -157,21 +157,6 @@ class userController{
         }
     }
 
-    static async updateAva(req,res){
-        try{
-            let id = +req.params.id;
-            let avatar = req.files.image[0].path;
-            let result=await User.update({
-                avatar
-            },{
-                where:{id}
-            })
-            res.status(200).json(result)
-        }catch(err){
-            res.status(500).json(err)
-        }
-    }
-
     static async delete(req,res){
         try{
             const id = req.params.id;

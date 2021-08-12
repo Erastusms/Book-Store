@@ -1,4 +1,5 @@
-const {Order} = require('../models/order')
+const {Order} = require('../models')
+const { Op } = require("sequelize")
 
 class orderController{
     static async show(req,res){
@@ -29,27 +30,30 @@ class orderController{
     static async create(req,res){
         try{
             const{name,subtotal,total_qty,city,address,UserId}=req.body
-            console.log('bc1')
-            let discount=0
-            if(+total_qty>=2){
-                discount = (+subtotal)-(+subtotal*5/100)
-                console.log('bc11')
-            }else{
-                discount=0;
-                console.log('bc11')
-            }
-            console.log('bc2')
-            let tax = (+subtotal)*10/100;
-            let total_due = (+subtotal)+(discount)+(tax)
-            console.log(total_due)
-            let payt_trx_number=`9999${total_qty}${total_due}`
-            console.log(payt_trx_number)
-            let status="open"
-            console.log('bc3')
-            let orders = await Order.create({
-                name,subtotal,discount,tax,total_due,total_qty,payt_trx_number,city,address,status,UserId
+            let orderName = name;
+            console.log(orderName)
+            let findName = await Order.findAll()
+            let fN = findName.map(fn=>{
+                return fn.name
             })
-            res.status(200).json(orders)
+            let flag =0;
+            fN.forEach(fn=>{
+                if(fn===name){
+                flag +=1
+                }
+            })
+            if(flag!==0){
+                res.status(403).json({
+                    message:"name already exist"
+                })
+            }else{
+                let orders = await Order.create({
+                    name:orderName,subtotal,total_qty,city,address,UserId
+                })
+                res.status(200).json({
+                    message:'data has been create'
+                })
+            }
         }catch(err){
             res.status(500).json(err)
         }
@@ -57,8 +61,40 @@ class orderController{
 
     static async update(req,res){
         try{
-            let id = +req.params.id;
+            let idO = +req.params.id;
+            const {name,subtotal,total_qty,city,address,UserId}=req.body
+            console.log('1')
 
+            let findName = await Order.findAll({
+                where:{id:{[Op.ne]:idO}}
+            })
+            console.log('ok')
+            let fN = findName.map(fn=>{
+                return fn.name
+            })
+            console.log('2')
+            let flag =0;
+            fN.forEach(fn=>{
+                if(fn===name){
+                flag +=1
+                }
+            })
+            console.log('3')
+            if(flag!==0){
+                res.status(403).json({
+                    message:"name already exist"
+                })
+            }else{
+            let orders = await Order.update({
+                name,subtotal,total_qty,city,address,UserId
+            },{
+                where:{id:idO},
+                individualHooks:true
+            })
+            res.status(200).json({
+                message:'data has been update'
+            })
+        }
         }catch(err){
             res.status(500).json(err)
         }
@@ -67,7 +103,15 @@ class orderController{
     static async delete(req,res){
         try{
             let id = +req.params.id;
-
+            let orders = await Order.destroy({
+                where:{id}
+            })
+            orders=== 1 ? res.status(200).json({
+                message:'data has been delete!'
+            }):
+            res.status(404).json({
+                message:`id ${id} not found!`
+            })
         }catch(err){
             res.status(500).json(err)
         }
