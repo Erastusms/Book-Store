@@ -1,24 +1,14 @@
-const {Shopping_Cart} = require('../models')
+const {Line_Item} = require('../models')
 
-class cartController{
+class itemController{
     static async show(req,res){
         try{
-            let carts= await Shopping_Cart.findAll({
+            let items = await Line_Item.findAll({
                 order: [
                     ['id', 'ASC']
                 ]
             })
-            res.status(200).json(carts)
-        }catch(err){
-            res.status(500).json(err)
-        }
-    }
-
-    static async showById(req,res){
-        try{
-            let id = +req.params.id;
-            let carts = await Shopping_Cart.findByPk(id)
-            res.status(200).json(carts)
+            res.status(200).json(items)
         }catch(err){
             res.status(500).json(err)
         }
@@ -27,15 +17,24 @@ class cartController{
     static async showByUser(req,res){
         try{
             let UserId = +req.UserData.id;
-            console.log(UserId)
-            let cart = await Shopping_Cart.findAll({
+            let items = await Line_Item.findAll({
                 where:{UserId}
             },{
                 order: [
                     ['id', 'ASC']
                 ]
             })
-            res.status(200).json(cart)
+            res.status(200).json(items)
+        }catch(err){
+            res.status(500).json(err)
+        }
+    }
+
+    static async showById(req,res){
+        try{
+            let id = +req.params.id;
+            let items = await Line_Item.findByPk(id)
+            res.status(200).json(items)
         }catch(err){
             res.status(500).json(err)
         }
@@ -43,13 +42,13 @@ class cartController{
 
     static async create(req,res){
         try{
-            const UserId=+req.UserData.id
-            console.log(UserId)
-            const{status}=req.body
-            let carts = await Shopping_Cart.create({
-                status,UserId
+            const{qty,status,ProductId,ShoppingCartId,OrderId}=req.body
+            console.log(req.body)
+            let items = await Line_Item.create({
+                qty,status,ProductId,ShoppingCartId,OrderId
             })
-            res.status(200).json(carts)
+            console.log('oke')
+            res.status(200).json(items)
         }catch(err){
             res.status(500).json(err)
         }
@@ -58,13 +57,14 @@ class cartController{
     static async update(req,res){
         try{
             let id = +req.params.id;
-            const {status}=req.body
-            let carts = await Shopping_Cart.update({
-                status
+            const{qty,status,ProductId,ShoppingCartId,OrderId}=req.body
+            let items = await Line_Item.update({
+                qty,status,ProductId,ShoppingCartId,OrderId
             },{
-                where:{id}
+                where:{id},
+                individualHooks:true
             })
-            carts[0]===1?res.status(200).json({
+            items[0]===1?res.status(200).json({
                 message:"data has been update"
             }):
             res.status(400).json({
@@ -78,10 +78,10 @@ class cartController{
     static async delete(req,res){
         try{
             let id = +req.params.id;
-            let carts = await Shopping_Cart.destroy({
+            let items = await Line_Item.destroy({
                 where:{id}
             })
-            carts===1 ? res.status(200).json({
+            items===1 ? res.status(200).json({
                 message:'data has been delete!'
             }):
             res.status(400).json({
@@ -91,6 +91,7 @@ class cartController{
             res.status(500).json(err)
         }
     }
+
 }
 
-module.exports = cartController
+module.exports = itemController
