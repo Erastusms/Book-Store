@@ -16,7 +16,11 @@ class imageController{
 
     static async create(req,res){
         try{
-            const{filename,filesize,filetype,primary,ProductId}=req.body
+            const{primary,ProductId}=req.body
+            let filename = req.file.filename;
+            let filesize = req.file.size;
+            let filetype = req.file.mimetype;
+
             let images = await Products_Image.create({
                 filename,filesize,filetype,primary,ProductId
             })
@@ -29,7 +33,10 @@ class imageController{
     static async update(req,res){
         try{
             let id = +req.params.id;
-            const{filename,filesize,filetype,primary,ProductId}=req.body
+            const{primary,ProductId}=req.body
+            let filename = req.file.filename;
+            let filesize = req.file.size;
+            let filetype = req.file.mimetype;
             let images = await Products_Image.update({
                 filename,filesize,filetype,primary,ProductId
             },{
