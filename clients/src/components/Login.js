@@ -1,36 +1,33 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
-import Swal from 'sweetalert2'
-export default function Login() {
-//   const [state, setState] = useState({
-//     email: "",
-//     password: ""
-// })
+import axios from "axios";
+import Swal from "sweetalert2";
+export default function Login({ login, userLogin, getToken }) {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
 
-// const submitHandler = e => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    loginAxios();
+  };
 
-//     // e.preventDefault()
-//     // loginAxios()
-//     // login(true)
-//     userLogin(true)
-// }
-
-// const loginAxios = async () => {
-//     try {
-//         const result = await axios({
-//             method: 'POST',
-//             url: "http://localhost:3000/users/login",
-//             data: state
-//         })
-//         // const access_token = result.data["access_token"]
-//         console.log(result.data)
-//         userLogin(true)
-//         // getToken(access_token)
-//     } catch (err) {
-//         Swal.fire("ERROR", `${err}`, "error")
-//     }
-// }
+  const loginAxios = async () => {
+    try {
+      const result = await axios({
+        method: "POST",
+        url: "http://localhost:3000/users/login",
+        data: state,
+      });
+      const access_token = result.data["access_token"];
+      console.log(access_token);
+      userLogin(true);
+      getToken(access_token);
+    } catch (err) {
+      Swal.fire("ERROR", `${err}`, "error");
+    }
+  };
 
   return (
     <div className="container-fluid">
@@ -56,9 +53,9 @@ export default function Login() {
               {/* <label>Email</label> */}
               <input
                 type="email"
-                required
                 className="form-control"
                 placeholder="Email"
+                onChange={e => setState({ ...state, email: e.target.value })}
               />
               {/* <small>Input email format</small> */}
             </div>
@@ -66,15 +63,17 @@ export default function Login() {
               {/* <label>Password</label> */}
               <input
                 type="password"
-                required
                 className="form-control"
                 placeholder="Password"
+                onChange={e => setState({ ...state, password: e.target.value })}
               />
             </div>
-            <div className="mb-3">
-              <button className="btn btn-block btn-primary rounded">
-                <Link to="/homepage">Login</Link>
-                {/* Login */}
+            <div className="mb-3 text-center">
+              <button
+                onClick={(e) => submitHandler(e)}
+                className="btn btn-block btn-primary"
+              >
+                Login
               </button>
             </div>
           </div>

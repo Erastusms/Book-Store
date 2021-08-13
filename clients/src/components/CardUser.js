@@ -1,11 +1,11 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Swal from "sweetalert2";
 
 export default function CardUser(props) {
-  const { users } = props;
+  const { id, name, email, gender } = props.user;
   // const history = useHistory();
   // const URL = "http://localhost:3000";
   // const deleteItemHandler = (id) => {
@@ -58,58 +58,69 @@ export default function CardUser(props) {
   //     </div>
   //   </div>
   // );
+
+  const params = useParams();
+  console.log(params.id);
+  const [item, setItem] = useState({});
+  id = +params.id;
+  const URL = "http://localhost:3000";
+  useEffect(() => {
+    getUserById();
+  }, []);
+
+  const getUserById = async () => {
+    try {
+      let result = await axios({
+        method: "GET",
+        url: `${URL}/users/${id}`,
+      });
+      setItem(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="container">
-      <div className="row mt-5">
+      <h1>HAI PROFILE</h1>
+      {/* <div className="row mt-5">
         <div className="col mt-5">
-          {users.map((user) => {
-            return (
-              <div className="card" style={{ "max-width": "1080px" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img
-                      src={user.image}
-                      className="img-fluid rounded-start"
-                      alt="..."
-                      width="600px"
-                    />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <div className="row justify-content-between mb-2">
-                        <div className="col-8">
-                          <h5 className="card-title text-uppercase">
-                            {user.username}
-                          </h5>
-                        </div>
-                        <div className="col-auto">
-                          <button className="btn btn-primary">
-                            Edit profile
-                          </button>
-                        </div>
-                      </div>
-                      <p className="card-text">
-                        Date of birth : {user.birthdate}
-                      </p>
-                      <p className="card-text">
-                        Age : {user.age}
-                      </p>
-                      <p className="card-text">
-                        Gender : {user.gender}
-                      </p>
-                      <p className="card-text card-footer">
-                        <small className="text-muted">
-                          Last updated 3 mins ago
-                        </small>
-                      </p>
+          <div className="card" style={{ "max-width": "1080px" }}>
+            <div className="row g-0">
+              <div className="col-md-4">
+                <img
+                  src={user.image}
+                  className="img-fluid rounded-start"
+                  alt="..."
+                  width="600px"
+                />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <div className="row justify-content-between mb-2">
+                    <div className="col-8">
+                      <h5 className="card-title text-uppercase">
+                        {user.username}
+                      </h5>
+                    </div>
+                    <div className="col-auto">
+                      <button className="btn btn-primary">Edit profile</button>
                     </div>
                   </div>
+                  <p className="card-text">Date of birth : {user.birthdate}</p>
+                  <p className="card-text">Age : {user.age}</p>
+                  <p className="card-text">Gender : {user.gender}</p>
+                  <p className="card-text card-footer">
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </p>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

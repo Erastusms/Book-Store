@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function Register() {
+  const history = useHistory()
   const [state, setState] = useState({
-    id: null,
-    username: "",
+    name: "",
     email: "",
     password: "",
+    state: "",
     birthdate: "",
     gender: "",
   });
@@ -27,6 +28,12 @@ export default function Register() {
         data: state,
       });
       console.log(result.data);
+      history.push("/");
+      Swal.fire(
+        'Welcome new member',
+        'Acoount has been created',
+        'success'
+      )
     } catch (err) {
       Swal.fire("ERROR", `${err}`, "error");
     }
@@ -44,20 +51,18 @@ export default function Register() {
               </small>
             </div>
             <div className="mb-3">
-              {/* <label>Email</label> */}
+              <small>Username</small>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Username"
                 required
-                onChange={(e) =>
-                  setState({ ...state, username: e.target.value })
-                }
+                onChange={(e) => setState({ ...state, name: e.target.value })}
               />
               {/* <small>Input email format</small> */}
             </div>
             <div className="mb-3">
-              {/* <label>Email</label> */}
+              <small>Email</small>
               <input
                 type="email"
                 className="form-control"
@@ -68,7 +73,7 @@ export default function Register() {
               {/* <small>Input email format</small> */}
             </div>
             <div className="mb-3">
-              {/* <label>Password</label> */}
+              <small>Password</small>
               <input
                 type="password"
                 className="form-control"
@@ -80,7 +85,16 @@ export default function Register() {
               />
             </div>
             <div className="mb-3">
-              {/* <label>Password</label> */}
+              <small>State</small>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="State"
+                required
+                onChange={(e) => setState({ ...state, state: e.target.value })}
+              />
+            </div>
+            <div className="mb-3">
               <small>Birthdate</small>
               <input
                 type="date"
@@ -96,34 +110,34 @@ export default function Register() {
                 <input
                   className="form-check-input"
                   type="radio"
-                  id="gender"
                   name="gender"
+                  value="Male"
                   onChange={(e) =>
                     setState({ ...state, gender: e.target.value })
                   }
                 />
-                <label className="form-check-label" htmlFor="Male">
+                <small className="form-check-label" htmlFor="Male">
                   Male
-                </label>
+                </small>
               </div>
               <div className="form-check form-check-inline border p-2 rounded col-5">
                 <input
                   className="form-check-input"
                   type="radio"
-                  id="gender"
                   name="gender"
+                  value="Female"
                   onChange={(e) =>
                     setState({ ...state, gender: e.target.value })
                   }
                 />
-                <label className="form-check-label" htmlFor="Female">
+                <small className="form-check-label" htmlFor="Female">
                   Female
-                </label>
+                </small>
               </div>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 text-center">
               <button
-                className="btn btn-block btn-success rounded"
+                className="btn btn-success"
                 onClick={(e) => submitHandler(e)}
               >
                 Register

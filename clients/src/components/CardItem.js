@@ -1,96 +1,67 @@
-import React from "react";
-
+import React, { useState, useEffect } from 'react'
+import axios from "axios";
+import { Link } from "react-router-dom";
 export default function CardItem(props) {
-  const { product } = props;
+  const { id, name, price, condition, category, rating, views } = props.item;
+  
   return (
-    <div className="row row-cols-1 row-cols-md-6 g-4 mt-4">
-      {product.map((produk) => {
-        if (props.isNew)
-          return (
-            <div className="col">
-              <div className="card h-100">
-                <img
-                  src={produk.image}
-                  className="card-img-top h-50"
-                  alt={produk.image}
-                />
-                <div class="card-img-overlay p-0 text-start">
-                  <p className="bg-primary badge">{produk.condition}</p>
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title fw-bolder">{produk.name}</h5>
-                  {/* <p className="card-text col-sm-12 text-truncate">
-                    {produk.desc}
-                  </p> */}
-                  <small className="rounded bg-danger px-2">
-                    {produk.category}
-                  </small>
-                  <br />
-                  <img
-                    src="https://image.flaticon.com/icons/png/512/1828/1828884.png"
-                    width="15%"
-                    className="me-2"
-                    alt=""
-                    title="Rating"
-                  />
-                  <small className="pt-2">{produk.rating}</small>
-                  <br />
-                  <img
-                    src="https://image.flaticon.com/icons/png/512/4232/4232149.png"
-                    width="15%"
-                    alt=""
-                  />
-                  <small className="ps-2">{produk.views} Views</small>
-                </div>
-                <div className="card-body m-1 p-0 text-center">
-                  <small className="text-white">Buy Now</small>
-                  <div className="vr mx-2"></div>
-                  <small>
-                    <img
-                      className="img-fluid"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="right"
-                      title="Tooltip on right"
-                      src="https://image.flaticon.com/icons/png/512/3144/3144456.png"
-                      alt=""
-                      width="15%"
-                    />
-                  </small>
-                </div>
-                <div className="card-footer">
-                  <big className="text-warning">Rp {produk.price}</big>
-                </div>
-              </div>
-            </div>
-          );
-
-        return (
-          <div className="col">
-            <div className="card h-100">
-              <img
-                src={produk.image}
-                className="card-img-top h-50"
-                alt={produk.image}
-              />
-              <div class="card-img-overlay p-0 text-start">
-                <p className="bg-primary badge">{produk.condition}</p>
-              </div>
-              <div className="card-body">
-                <h5 className="card-title fw-bolder">{produk.name}</h5>
-                <p className="card-text col-sm-12 text-truncate">
-                  {produk.desc}
-                </p>
-                <small className="rounded bg-danger px-2">
-                  {produk.category}
-                </small>
-              </div>
-              <div className="card-footer">
-                <big className="text-danger">Rp {produk.price}</big>
-              </div>
+    <div className="card-group mt-3">
+      <Link className="text-decoration-none" to={`/products/${id}`}>
+        <div className="card">
+          <div class="card bg-dark text-white">
+            <img
+              src="https://via.placeholder.com/150"
+              className="card-img-top rounded"
+              alt="https://via.placeholder.com/150"
+            />
+            <div class="card-img-overlay p-0 text-start">
+              <p className="bg-primary badge">{condition}</p>
             </div>
           </div>
-        );
-      })}
+          <div className="card-body">
+            <h5 className="card-title fw-bolde text-dark">{name}</h5>
+            <small className="rounded bg-danger text-dark px-2">{category}</small>
+            <br />
+            <img
+              src="https://image.flaticon.com/icons/png/512/1828/1828884.png"
+              width="10%"
+              className="m-2"
+              alt=""
+              title="Rating"
+            />
+            <small className="ms-2">{rating}</small>
+            <br />
+            <img
+              src="https://image.flaticon.com/icons/png/512/4232/4232149.png"
+              width="10%"
+              className="m-2"
+              alt=""
+            />
+            <small className="ps-2">{views} Views</small>
+          </div>
+          <div className="card-footer m-1 p-0 text-center">
+            <Link
+              className="card-link text-black text-decoration-none"
+              to="/checkout"
+            >
+              Buy Now
+            </Link>
+            <div className="vr align-text-bottom mx-2"></div>
+            <Link to="/cart">
+              <img
+                className="img-fluid"
+                title="Tooltip on right"
+                src="https://image.flaticon.com/icons/png/512/3144/3144456.png"
+                alt=""
+                width="10%"
+              />
+            </Link>
+          </div>
+          <div className="card-footer bg-warning text-center rounded">
+            <h4 className="text-white fw-bolder">Rp {price}</h4>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-
+import CardCart from "./CardCart"
 export default function Cart() {
     return (
-        <div>
-            <h1>Ini halaman Cart</h1>
+        <div className="container-fluid">
+            <CardCart />
         </div>
     )
 }
