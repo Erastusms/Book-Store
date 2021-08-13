@@ -26,7 +26,12 @@ class cartController{
 
     static async showByUser(req,res){
         try{
-
+            let UserId = +req.UserData.id;
+            console.log(UserId)
+            let cart = await Shopping_Cart.findAll({
+                where:{UserId}
+            })
+            res.status(200).json(cart)
         }catch(err){
             res.status(500).json(err)
         }
@@ -34,7 +39,9 @@ class cartController{
 
     static async create(req,res){
         try{
-            const{status,UserId}=req.body
+            const UserId=+req.UserData.id
+            console.log(UserId)
+            const{status}=req.body
             let carts = await Shopping_Cart.create({
                 status,UserId
             })
