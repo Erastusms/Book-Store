@@ -3,20 +3,23 @@ import React, { Component } from "react";
 import LandingPage from "./LandingPage";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Header, Profile, Cart, Home, Jumbotron, Footer } from "components";
-export default function HomePage() {
+import { Header, Profile, Cart, Home, Jumbotron, DetailItem, Footer } from "components";
+export default function HomePage({ login, userLogin }) {
   return (
     <Router>
-      <Header />
+      <Header userLogin={userLogin}/>
       <Switch>
         <Route exact path="/">
           <Jumbotron />
-          <Home />
+          <Home login={login}/>
         </Route>
-        <Route exact path="/profile">
+        <Route path="/profile">
           <Profile />
         </Route>
-        <Route exact path="/cart">
+        <Route path="/products/:id">
+          <DetailItem />
+        </Route>
+        <Route path="/cart">
           <Cart />
         </Route>
       </Switch>
