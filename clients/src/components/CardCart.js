@@ -1,35 +1,62 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function CardCart() {
+  // const {
+  //   id,
+  //   name,
+  //   desc,
+  //   price,
+  //   stock,
+  //   expire,
+  //   weight,
+  //   category,
+  //   publisher,
+  //   condition,
+  // } = props.item;
+
   return (
-    <div className="container px-4 py-5">
-      {/* <div className="row"> */}
-        {/* <div className="col-2 border">kolom 4</div> */}
-        <div className="col-8 p-0 mt-4">
-          <h2 className="pb-2 border-bottom">Cart</h2>
-          <div class="card mb-3" style={{ "max-width": "840px" }}>
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img
-                  src="https://via.placeholder.com/150"
-                  class="img-fluid rounded-start w-50"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-8 p-0 m-0">
-                <div class="card-body">
-                  <h2 class="card-title">Nama Produk</h2>
-                  
-                </div>
-                <div className="card-footer">
-                  <small class="text-muted">Created on (tanggal buat)</small>
-                </div>
+    <div className="container px-4 py-5" style={{ height: "100%" }}>
+      <h1>
+        <span className="border-bottom ms-5">Cart</span>
+      </h1>
+      <div className="card border rounded-2 m-5 p-2" style={{ "max-height": "540px" }}>
+        <div className="row">
+          {/* <div className="col-1"></div> */}
+          <div className="col-auto py-3 ps-3 ms-3 my-3">
+            <img
+              src="https://via.placeholder.com/150"
+              className="card-img-top rounded"
+              alt="https://via.placeholder.com/150"
+            />
+          </div>
+          <div className="col py-3 my-3 pe-3 me-3">
+            <div class="row justify-content-between">
+              <h2 class="col-4 fw-bolder">Nama Produk</h2>
+              <div class="col-4 text-end">
+                <Link
+                  className="card-link text-dark text-decoration-none"
+                  to="/checkout"
+                >
+                  Buy Now
+                </Link>
+                <div className="vr align-text-bottom mx-2" />
+                <Link
+                  className="card-link text-decoration-none"
+                  to="/delete"
+                >
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
+                    alt=""
+                    width="10%"
+                  />
+                </Link>
               </div>
             </div>
+            <h6 className="bg-warning rounded p-2 d-inline">Status</h6>
+            <p className="footer pt-4">Created on</p>
           </div>
         </div>
-        {/* <div className="col-2 border">kolom 4</div> */}
-      {/* </div> */}
+      </div>
     </div>
   );
 }

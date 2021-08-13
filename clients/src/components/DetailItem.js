@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import CardDetail from "./CardDetail";
 import axios from "axios";
 
 export default function DetailItem() {
@@ -13,9 +14,13 @@ export default function DetailItem() {
 
   const getItemById = async () => {
     try {
+      const access_token = localStorage.getItem("access_token");
       let result = await axios({
         method: "GET",
         url: `${URL}/products/${id}`,
+        headers: {
+          access_token,
+        },
       });
       setItem(result.data);
     } catch (err) {
@@ -24,7 +29,9 @@ export default function DetailItem() {
   };
   return (
     <div>
-      <h1>{item.name}</h1>
+      <div className="container-md-2">
+        <CardDetail key={item.id} item={item} />;
+      </div>
     </div>
   );
 }

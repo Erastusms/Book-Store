@@ -1,39 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function Register() {
-  const history = useHistory()
-  const [state, setState] = useState({
-    name: "",
-    email: "",
-    password: "",
-    state: "",
-    birthdate: "",
-    gender: "",
-  });
+export default function EditData() {
+  const URL = "http://localhost:3000";
+
+  const history = useHistory();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [gender, setGender] = useState("");
+
+  // const [user, setUser] = useState({});
+  useEffect(() => {
+    console.log("use effect jalan");
+    getProfile();
+  }, []);
+
+  const getProfile = async () => {
+    try {
+      const access_token = localStorage.getItem("access_token");
+      let result = await axios({
+        method: "GET",
+        url: `${URL}/users/profile`,
+        headers: {
+          access_token,
+        },
+      });
+      const { name, email, state, birthdate, gender } = result.data;
+      setName(name);
+      setEmail(email);
+      setState(state);
+      setBirthdate(birthdate);
+      setGender(gender);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // this.setState({ [e.target.name]: e.target.value });
-    addData();
+    let objTemp = {
+      name,
+      email,
+      state,
+      birthdate,
+      gender,
+    };
+    updateData(objTemp, e);
   };
 
-  const addData = async () => {
+  const updateData = async (user, e) => {
     try {
+      const access_token = localStorage.getItem("access_token");
+      const { name, email, state, birthdate, gender } = user;
       const result = await axios({
-        method: "POST",
-        url: "http://localhost:3000/users/register",
-        data: state,
+        method: "PUT",
+        url: `${URL}/users/update`,
+        data: {
+          name,
+          email,
+          state,
+          birthdate,
+          gender,
+        },
+        headers: {
+          access_token,
+        },
       });
-      console.log(result.data);
+      Swal.fire("Congratulations", "Account has been updated", "success");
       history.push("/");
-      Swal.fire(
-        'Congratulations',
-        'Acoount has been created',
-        'success'
-      )
     } catch (err) {
       Swal.fire("ERROR", `${err}`, "error");
     }
@@ -41,23 +79,17 @@ export default function Register() {
 
   return (
     <div className="container-fluid">
-      <div className="row justify-content-center mt-5 pt-5">
+      <div className="row justify-content-center m-2 p-2">
         <div className="col-sm-4">
           <div className="shadow border border-2 p-3 rounded">
-            <div className="mb-2 text-center">
-              <h3>Daftar Sekarang</h3>
-              <small>
-                Sudah punya akun? <Link to="/">Login</Link>
-              </small>
-            </div>
             <div className="mb-3">
               <small>Username</small>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Username"
-                required
-                onChange={(e) => setState({ ...state, name: e.target.value })}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -66,20 +98,8 @@ export default function Register() {
                 type="email"
                 className="form-control"
                 placeholder="Email"
-                required
-                onChange={(e) => setState({ ...state, email: e.target.value })}
-              />
-            </div>
-            <div className="mb-3">
-              <small>Password</small>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                required
-                onChange={(e) =>
-                  setState({ ...state, password: e.target.value })
-                }
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -88,8 +108,8 @@ export default function Register() {
                 type="text"
                 className="form-control"
                 placeholder="State"
-                required
-                onChange={(e) => setState({ ...state, state: e.target.value })}
+                value={state}
+                onChange={(e) => setState(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -97,10 +117,8 @@ export default function Register() {
               <input
                 type="date"
                 className="form-control"
-                required
-                onChange={(e) =>
-                  setState({ ...state, birthdate: e.target.value })
-                }
+                value={birthdate}
+                onChange={(e) => setBirthdate(e.target.value)}
               />
             </div>
             <div className="mb-5 text-center" required>
@@ -110,9 +128,7 @@ export default function Register() {
                   type="radio"
                   name="gender"
                   value="Male"
-                  onChange={(e) =>
-                    setState({ ...state, gender: e.target.value })
-                  }
+                  onChange={(e) => setGender(e.target.value)}
                 />
                 <small className="form-check-label" htmlFor="Male">
                   Male
@@ -124,9 +140,7 @@ export default function Register() {
                   type="radio"
                   name="gender"
                   value="Female"
-                  onChange={(e) =>
-                    setState({ ...state, gender: e.target.value })
-                  }
+                  onChange={(e) => setGender(e.target.value)}
                 />
                 <small className="form-check-label" htmlFor="Female">
                   Female
@@ -138,7 +152,7 @@ export default function Register() {
                 className="btn btn-success"
                 onClick={(e) => submitHandler(e)}
               >
-                Register
+                Updated
               </button>
             </div>
           </div>
