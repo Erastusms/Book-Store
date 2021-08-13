@@ -11,7 +11,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING(15)
       },
-      user_id: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

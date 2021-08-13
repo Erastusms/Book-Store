@@ -2,9 +2,13 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Orders', {
-      name: {
+      id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
         type: Sequelize.STRING(25)
       },
       subtotal: {
@@ -34,7 +38,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING(15)
       },
-      user_id: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

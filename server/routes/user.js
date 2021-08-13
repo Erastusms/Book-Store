@@ -12,7 +12,6 @@ userRouter.post('/register',userController.register)
 userRouter.post('/login',userController.login)
 userRouter.put('/update/:id',userController.update)
 userRouter.put('/UpdatePwd/:id',userController.updatePwd)
-userRouter.put('/UpdateAva/:id',userController.updateAva)
 userRouter.delete('/delete/:id',userController.delete)
 
 
