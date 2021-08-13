@@ -20,7 +20,7 @@ module.exports = {
       primary: {
         type: Sequelize.BOOLEAN
       },
-      ProdId: {
+      ProductId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

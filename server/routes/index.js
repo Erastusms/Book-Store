@@ -6,11 +6,11 @@ router.get('/',(req,res)=>{
 const userRoute = require('./user')
 const prodRoute = require('./product')
 const orderRoute = require('./order')
-// const cartRoute =require('./cart')
+const cartRoute =require('./shopping_cart')
 
 router.use('/users',userRoute)
 router.use('/products',prodRoute)
 router.use('/orders',orderRoute)
-// router.use('/carts',cartRoute)
+router.use('/carts',cartRoute)
 
 module.exports = router
