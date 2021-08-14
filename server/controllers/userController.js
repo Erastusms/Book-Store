@@ -30,8 +30,8 @@ class userController{
     }
 
     static async register(req,res){
-        console.log(req.body)
         try{
+            let avatar = req.file.path;
             const {name,email,password,state,birthdate,gender,type} =req.body
             let mail = email.toLowerCase();
             let findEmail = await User.findOne({
@@ -46,7 +46,7 @@ class userController{
             }else{
                 // console.log("oke")
                 let user = await User.create({
-                    name,email:mail,password,state,birthdate,gender,type
+                    name,email:mail,password,state,birthdate,gender,avatar,type
                 })
                 res.status(201).json(user)
             }
@@ -86,7 +86,8 @@ class userController{
     static async update(req,res){
         try{
         let idP = +req.params.id;
-        const {name,email,state,birthdate,gender,avatar,type} =req.body;
+        let avatar = req.file.path;
+        const {name,email,state,birthdate,gender,type} =req.body;
         let mail = email.toLowerCase();
         let findEmail = await User.findAll({
             where:{id:{[Op.ne]:idP}}
@@ -169,6 +170,23 @@ class userController{
             res.status(404).json({
                 message:"id is not found!"
             })
+        }catch(err){
+            res.status(500).json(err)
+        }
+    }
+
+    static async mult(req,res){
+        try{
+            let avatar = req.file.path;
+            console.log(avatar)
+            console.log(req.file)
+            let id = +req.params.id;
+            let users = await User.update({
+                avatar
+            },{
+                where:{id}
+            })
+            res.status(200).json(users)
         }catch(err){
             res.status(500).json(err)
         }

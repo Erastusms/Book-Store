@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     hooks:{
       beforeCreate(order,options){
         let qty = +order.total_qty
-          if(qty>=2){
+          if(qty>2){
             order.discount = (+order.subtotal*5/100)
           }else{
             order.discount=0;
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       },
         beforeUpdate(order,options){
           let qty = +order.total_qty
-          if(qty>=2){
+          if(qty>2){
             order.discount = (+order.subtotal*5/100)
           }else{
             order.discount=0;

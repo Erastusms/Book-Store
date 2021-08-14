@@ -19,11 +19,19 @@ module.exports = (sequelize, DataTypes) => {
   Line_Item.init({
     qty: DataTypes.INTEGER,
     status: DataTypes.STRING(15),
-    ProdId: DataTypes.INTEGER,
-    ShopId: DataTypes.INTEGER,
-    OrderName: DataTypes.STRING(25),
+    ProductId: DataTypes.INTEGER,
+    ShoppingCartId: DataTypes.INTEGER,
+    OrderId: DataTypes.STRING(25),
     uniqId: DataTypes.STRING(30)
   }, {
+    hooks:{
+      beforeCreate(item,options){
+        item.uniqId=`L${item.ProductId}${item.ShoppingCartId}${item.OrderId}I`
+      },
+      beforeUpdate(item,options){
+        item.uniqId=`L${item.ProductId}${item.ShoppingCartId}${item.OrderId}I`
+      }
+    },
     sequelize,
     modelName: 'Line_Item',
   });

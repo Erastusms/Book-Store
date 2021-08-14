@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     filesize: DataTypes.STRING(100),
     filetype: DataTypes.STRING(100),
     primary: DataTypes.BOOLEAN,
-    ProdId: DataTypes.INTEGER
+    ProductId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Products_Image',

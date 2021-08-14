@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks:{
       beforeCreate(user,options){
-        user.avatar=' ';
         user.password = encrypter(user.password);
       }
     },

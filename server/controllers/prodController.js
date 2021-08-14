@@ -1,10 +1,11 @@
-const{Product}= require('../models')
+const{Product,Products_Image}= require('../models')
 
 class prodController{
     static async show(req,res){
         try{
             let products = await Product.findAll({
-                order: [
+                include:[Products_Image]
+                ,order: [
                     ['id', 'ASC']
                 ]
             })
@@ -18,6 +19,7 @@ class prodController{
         try{
             let id = +req.params.id;
             let products = await Product.findOne({
+                include:[Products_Image],
                 where:{id}
             })
 

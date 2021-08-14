@@ -14,13 +14,13 @@ module.exports = {
       status: {
         type: Sequelize.STRING(15)
       },
-      ProdId: {
+      ProductId: {
         type: Sequelize.INTEGER
       },
-      ShopId: {
+      ShoppingCartId: {
         type: Sequelize.INTEGER
       },
-      OrderName: {
+      OrderId: {
         type: Sequelize.STRING(25)
       },
       uniqId: {
