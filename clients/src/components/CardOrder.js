@@ -1,0 +1,64 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Link, useHistory } from "react-router-dom";
+export default function CardOrder() {
+  // const {
+  //   id,
+  //   name,
+  //   desc,
+  //   price,
+  //   stock,
+  //   expire,
+  //   weight,
+  //   category,
+  //   publisher,
+  //   condition,
+  // } = props.item;
+
+  return (
+    <div className="container px-4 py-5" style={{ height: "100%" }}>
+      <h1 className="mb-4">
+        <span className="border-bottom ms-5">Order</span>
+      </h1>
+      <Link className="ms-5 btn-primary rounded text-decoration-none p-2" to="/addOrder">Add New Order</Link>
+      <div className="card border rounded-2 m-5 p-2" style={{ "max-height": "540px" }}>
+        <div className="row">
+          <div className="col-auto py-3 ps-3 ms-3 my-3">
+            <img
+              src="https://via.placeholder.com/150"
+              className="card-img-top rounded"
+              alt="https://via.placeholder.com/150"
+            />
+          </div>
+          <div className="col py-3 my-3 pe-3 me-3">
+            <div class="row justify-content-between">
+              <h2 class="col-4 fw-bolder">One Piece</h2>
+              <div class="col-4 text-end">
+                <Link
+                  className="card-link text-dark text-decoration-none"
+                  to="/checkout"
+                >
+                  Buy Now
+                </Link>
+                <div className="vr align-text-bottom mx-2" />
+                <Link
+                  className="card-link text-decoration-none"
+                  to="/delete"
+                >
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
+                    alt=""
+                    width="10%"
+                  />
+                </Link>
+              </div>
+            </div>
+            <h6 className="bg-warning rounded p-2 d-inline">Opens</h6>
+            <p className="footer pt-4">Created on 14 Aug 2021</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

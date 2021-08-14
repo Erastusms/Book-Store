@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AdminPage, HomePage } from "pages";
-// import { Tooltip, Toast, Popover } from 'bootstrap';
 import { Login, Register, SideBar } from "components";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [login, setLogin] = useState(false);
+
   const userLogin = (param) => {
     setLogin(param);
   };
@@ -27,13 +27,13 @@ function App() {
   return (
     <Router>
       {login ? (
-        <div className="main-page">
-          <div className="row">
-            <SideBar />
-            {/* <HomePage login={login} userLogin={userLogin} /> */}
-            <AdminPage login={login} userLogin={userLogin} />
-          </div>
-        </div>
+        <HomePage login={login} userLogin={userLogin} />
+        // <div className="main-page">
+        //   <div className="row">
+        //     <SideBar />
+        //     <AdminPage login={login} userLogin={userLogin} />
+        //   </div>
+        // </div>
       ) : (
         <Switch>
           <Route exact path="/">
@@ -44,6 +44,14 @@ function App() {
           </Route>
         </Switch>
       )}
+      {/* <div className="text-center">
+        <label>Upload file</label>
+        <input type="file" name="file" onChange={(e) => handleFile(e)} />
+        <br />
+        <button className="btn btn-primary" onClick={(e) => handleUpload(e)}>
+          Upload file
+        </button>
+      </div> */}
     </Router>
   );
 }

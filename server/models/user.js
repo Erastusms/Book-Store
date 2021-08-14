@@ -1,8 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const {encrypter} =require('../helpers/endes')
+"use strict";
+const { Model } = require("sequelize");
+const { encrypter } = require("../helpers/endes");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,28 +10,32 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Product)
-      User.hasMany(models.Shopping_Cart)
-      User.hasMany(models.Order)
+      User.hasMany(models.Product);
+      User.hasMany(models.Shopping_Cart);
+      User.hasMany(models.Order);
     }
-  };
-  User.init({
-    name: DataTypes.STRING(20),
-    email: DataTypes.STRING(55),
-    password: DataTypes.STRING,
-    state: DataTypes.STRING,
-    birthdate: DataTypes.DATE,
-    gender: DataTypes.STRING(6),
-    avatar: DataTypes.STRING,
-    type: DataTypes.STRING(10)
-  }, {
-    hooks:{
-      beforeCreate(user,options){
-        user.password = encrypter(user.password);
-      }
+  }
+  User.init(
+    {
+      name: DataTypes.STRING(20),
+      email: DataTypes.STRING(55),
+      password: DataTypes.STRING,
+      state: DataTypes.STRING,
+      birthdate: DataTypes.DATE,
+      gender: DataTypes.STRING(6),
+      avatar: DataTypes.STRING,
+      type: DataTypes.STRING(10),
     },
-    sequelize,
-    modelName: 'User',
-  });
+    {
+      hooks: {
+        beforeCreate(user, options) {
+          user.password = encrypter(user.password);
+          user.type = "user";
+        },
+      },
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };

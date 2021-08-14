@@ -11,7 +11,7 @@ export default function CardDetail(props) {
     category,
     publisher,
     condition,
-    views,
+    total_sold,
     rating,
   } = props.item;
 
@@ -34,7 +34,7 @@ export default function CardDetail(props) {
             <p className="p-0  m-0 text-muted">{publisher}</p>
             <div class="row justify-content-start mb-2">
               <div class="col-4 start">
-                <small>Dilihat oleh {views} orang</small>
+                <small> Terjual {total_sold} barang</small>
                 <div className="vr align-text-bottom mx-2" />
                 <small className="align-text-bottom">
                   <span className="me-1">

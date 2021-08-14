@@ -1,61 +1,114 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Link, useHistory } from "react-router-dom";
+
 export default function CardCart() {
-  // const {
-  //   id,
-  //   name,
-  //   desc,
-  //   price,
-  //   stock,
-  //   expire,
-  //   weight,
-  //   category,
-  //   publisher,
-  //   condition,
-  // } = props.item;
+  const URL = "http://localhost:3000";
+  let history = useHistory()
+  const [carts, setCarts] = useState({});
+  useEffect(() => {
+    console.log("use effect jalan");
+    getCart();
+  }, []);
+
+  const getCart = async () => {
+    try {
+      const access_token = localStorage.getItem("access_token");
+      let result = await axios({
+        method: "GET",
+        url: `${URL}/carts/myCarts`,
+        headers: {
+          access_token,
+        },
+      });
+      console.log(result.data);
+      setCarts(result.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteItemHandler = (e, id) => {
+    deleteAxios(id);
+  };
+
+  const deleteAxios = async (id) => {
+    try {
+      const access_token = localStorage.getItem("access_token");
+      let result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Cart has been deleted.", "success");
+
+        await axios({
+          method: "DELETE",
+          url: `${URL}/carts/delete/${id}`,
+          headers: {
+            access_token,
+          },
+        });
+        history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      Swal.fire("ERROR", `${err}`, "error");
+    }
+  };
 
   return (
     <div className="container px-4 py-5" style={{ height: "100%" }}>
-      <h1>
+      <h1 className="mb-4">
         <span className="border-bottom ms-5">Cart</span>
       </h1>
-      <div className="card border rounded-2 m-5 p-2" style={{ "max-height": "540px" }}>
-        <div className="row">
-          {/* <div className="col-1"></div> */}
-          <div className="col-auto py-3 ps-3 ms-3 my-3">
-            <img
-              src="https://via.placeholder.com/150"
-              className="card-img-top rounded"
-              alt="https://via.placeholder.com/150"
-            />
-          </div>
-          <div className="col py-3 my-3 pe-3 me-3">
-            <div class="row justify-content-between">
-              <h2 class="col-4 fw-bolder">Nama Produk</h2>
-              <div class="col-4 text-end">
-                <Link
-                  className="card-link text-dark text-decoration-none"
-                  to="/checkout"
-                >
-                  Buy Now
-                </Link>
-                <div className="vr align-text-bottom mx-2" />
-                <Link
-                  className="card-link text-decoration-none"
-                  to="/delete"
-                >
-                  <img
-                    src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
-                    alt=""
-                    width="10%"
-                  />
-                </Link>
-              </div>
-            </div>
-            <h6 className="bg-warning rounded p-2 d-inline">Status</h6>
-            <p className="footer pt-4">Created on</p>
-          </div>
-        </div>
+      <Link
+        className="ms-5 btn-primary rounded text-decoration-none p-2"
+        to="/addCart"
+      >
+        Add New Cart
+      </Link>
+
+      <div class="mx-5 mt-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {carts.map((cart) => {
+              return (
+                <tr>
+                  <th scope="row">{cart.id}</th>
+                  <td>{cart.status}</td>
+                  <td>
+                    <Link
+                      className="btn btn-primary"
+                      to={`/editCarts/${carts.id}`}
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={(e) => deleteItemHandler(e, carts.id)}
+                      class="btn btn-sm btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function Register() {
-  const history = useHistory()
+  const history = useHistory();
+  const URL = "http://localhost:3000";
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -14,28 +15,37 @@ export default function Register() {
     gender: "",
   });
 
+  const [avatar, setAvatar] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    // this.setState({ [e.target.name]: e.target.value });
-    addData();
+    const data = new FormData();
+    data.append("avatar", avatar);
+    data.append("name", state.name);
+    data.append("email", state.email);
+    data.append("password", state.password);
+    data.append("state", state.state);
+    data.append("gender", state.gender);
+    data.append("birthdate", state.birthdate);
+    console.log(data)
+    addData(data);
   };
 
-  const addData = async () => {
+  const addData = async (data) => {
     try {
       const result = await axios({
         method: "POST",
-        url: "http://localhost:3000/users/register",
-        data: state,
+        url: `${URL}/users/register`,
+        data: data,
+        header: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       console.log(result.data);
       history.push("/");
-      Swal.fire(
-        'Congratulations',
-        'Acoount has been created',
-        'success'
-      )
+      Swal.fire("Congratulations", "Account has been created", "success");
     } catch (err) {
       Swal.fire("ERROR", `${err}`, "error");
+      console.log(err);
     }
   };
 
@@ -132,6 +142,15 @@ export default function Register() {
                   Female
                 </small>
               </div>
+            </div>
+            <div className="mb-3">
+              <small>Upload File</small>
+              <input
+                type="file"
+                className="form-control"
+                name="avatar"
+                onChange={(e) => setAvatar(e.target.files[0])}
+              />
             </div>
             <div className="mb-3 text-center">
               <button
