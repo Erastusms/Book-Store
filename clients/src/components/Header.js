@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function Header({ login, userLogin }) {
-  
+export default function Header({ login, userLogin, isAdmin }) {
+  const history = useHistory();
 
   const logoutHandler = (e) => {
-    e.preventDefault();
     Swal.fire({
       title: "Hello there..",
       text: "Are you sure you want to log out?",
@@ -14,14 +13,40 @@ export default function Header({ login, userLogin }) {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         userLogin(false);
         localStorage.clear();
+        history.push("/");
       }
     });
   };
+
+  if (isAdmin)
+    return (
+      <>
+        <nav className="navbar navbar-expand-md navbar-blue bg-dark p-2 m-0">
+          <div className="navbar-collapse collapse justify-content-between">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link navbar-brand" to="/">
+                  Book Store
+                </Link>
+              </li>
+            </ul>
+            <ul className="navbar-nav">
+              <button
+                onClick={(e) => logoutHandler(e)}
+                className="btn btn-sm btn-outline-danger"
+              >
+                Logout
+              </button>
+            </ul>
+          </div>
+        </nav>
+      </>
+    );
 
   return (
     <>
@@ -49,38 +74,6 @@ export default function Header({ login, userLogin }) {
               <Link className="nav-link" to="/cart">
                 Cart
               </Link>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#loli"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider" />
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
             </li>
           </ul>
           <ul className="navbar-nav">

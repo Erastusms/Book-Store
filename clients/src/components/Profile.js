@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
-// import { Link, useHistory, useParams } from "react-router-dom";
-// import CardUser from "./CardUser";
-// import userData from "json/userExample.json";
+import CardUser from "./CardUser";
 import axios from "axios";
-export default function Profile() {
-  const [profile, setProfile] = useState({});
-
+export default function Profile({ login }) {
+  const URL = "http://localhost:3000";
+  const [user, setUser] = useState({});
   useEffect(() => {
+    console.log("use effect jalan");
     getProfile();
   }, []);
 
   const getProfile = async () => {
     try {
       const access_token = localStorage.getItem("access_token");
-      const result = await axios({
+      let result = await axios({
         method: "GET",
-        url: "http://localhost:3000/users/profile",
+        url: `${URL}/users/profile`,
         headers: {
           access_token,
         },
       });
-      console.log(result.data)
-      setProfile(result.data);
+      console.log(result.data);
+      setUser(result.data);
     } catch (e) {
       console.log(e);
     }
@@ -36,10 +35,8 @@ export default function Profile() {
   //   </div>
   // );
   return (
-    <div>
-        <h1>Account</h1>
-        <p>{JSON.stringify(profile)}</p>
-        <p>{profile.name}</p>
+    <div className="container-md-2">
+      <CardUser key={user.id} user={user} />
     </div>
-)
+  );
 }

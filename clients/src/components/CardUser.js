@@ -1,126 +1,69 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
-import axios from "axios";
-
-import Swal from "sweetalert2";
-
-export default function CardUser(props) {
-  const { id, name, email, gender } = props.user;
-  // const history = useHistory();
-  // const URL = "http://localhost:3000";
-  // const deleteItemHandler = (id) => {
-  //   try {
-  //     Swal.fire({
-  //       title: "Are you sure?",
-  //       text: "You won't be able to revert this!",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#3085d6",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, delete it!",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         axios({
-  //           method: "DELETE",
-  //           url: `${URL}/users/delete/${id}`,
-  //         });
-  //         history.push("/users");
-  //         Swal.fire("Deleted!", "Your file has been deleted.", "success");
-  //       }
-  //     });
-  //   } catch (err) {
-  //     Swal.fire("Get Error", `${err}`, "error");
-  //   }
-  // };
-
-  // return (
-  //   <div classNameName="col-md-2 col-sm-3 mb-3">
-  //     <div classNameName="container-fluid">
-  //       <div classNameName="text-center mt-5">
-  //         <Link to={`/users/showItems/${id}`}>
-  //           <img
-  //             classNameName="rounded-circle image-hover"
-  //             title={username}
-  //             src={image}
-  //             width="100px"
-  //             height="100px"
-  //             alt={username}
-  //           />
-  //         </Link>
-  //         <h5 classNameName="mt-2">{username}</h5>
-  //       </div>
-  //       <button
-  //         onClick={() => deleteItemHandler(id)}
-  //         classNameName="btn btn-sm btn-danger"
-  //       >
-  //         Delete
-  //       </button>
-  //     </div>
-  //   </div>
-  // );
-
-  const params = useParams();
-  console.log(params.id);
-  const [item, setItem] = useState({});
-  id = +params.id;
-  const URL = "http://localhost:3000";
-  useEffect(() => {
-    getUserById();
-  }, []);
-
-  const getUserById = async () => {
-    try {
-      let result = await axios({
-        method: "GET",
-        url: `${URL}/users/${id}`,
-      });
-      setItem(result.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+import React from "react";
+import { Link } from "react-router-dom";
+export default function CardDetail(props) {
+  const { id, name, email, state, birthdate, gender } = props.user;
 
   return (
-    <div className="container">
-      <h1>HAI PROFILE</h1>
-      {/* <div className="row mt-5">
-        <div className="col mt-5">
-          <div className="card" style={{ "max-width": "1080px" }}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img
-                  src={user.image}
-                  className="img-fluid rounded-start"
-                  alt="..."
-                  width="600px"
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <div className="row justify-content-between mb-2">
-                    <div className="col-8">
-                      <h5 className="card-title text-uppercase">
-                        {user.username}
-                      </h5>
-                    </div>
-                    <div className="col-auto">
-                      <button className="btn btn-primary">Edit profile</button>
-                    </div>
-                  </div>
-                  <p className="card-text">Date of birth : {user.birthdate}</p>
-                  <p className="card-text">Age : {user.age}</p>
-                  <p className="card-text">Gender : {user.gender}</p>
-                  <p className="card-text card-footer">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
+    <div className="container px-4 py-2" style={{ height: "100%" }}>
+      <div className="card border m-5 p-2">
+        <div className="row">
+          <div
+            className="col-auto py-3 ps-3 ms-3 my-3"
+            style={{ width: "300px" }}
+          >
+            <img
+              src="https://via.placeholder.com/600"
+              className="card-img-top rounded"
+              alt="https://via.placeholder.com/600"
+            />
+            <Link to="/update" className="btn btn-primary d-block rounded mt-3">
+              Upload Image
+            </Link>
+          </div>
+          <div className="col py-3 my-3 pe-3 me-3">
+            <h4 className="text-white">Biodata Diri</h4>
+            <div className="table-responsive-sm">
+              <table className="table">
+                <td className="text-muted">
+                  <tr>Name</tr>
+                  <tr>Birthdate</tr>
+                  <tr>Gender</tr>
+                </td>
+                <td className="text-warning">
+                  <tr>{name}</tr>
+                  <tr>{birthdate}</tr>
+                  <tr>{gender}</tr>
+                </td>
+              </table>
             </div>
+            <h4 className="text-white">Kontak</h4>
+            <div className="table-responsive-sm">
+              <table className="table">
+                <td className="text-muted pr-4">
+                  <tr>Email</tr>
+                  <tr>State</tr>
+                </td>
+                <td className="text-warning">
+                  <tr>{email}</tr>
+                  <tr>{state}</tr>
+                </td>
+              </table>
+            </div>
+            <Link
+              to="/editData"
+              className="btn btn-outline-secondary btn-sm d-inline rounded me-3"
+            >
+              Edit Data
+            </Link>
+            <Link
+              to="/editPwd"
+              className="btn btn-outline-secondary btn-sm d-inline rounded"
+            >
+              Edit Password
+            </Link>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

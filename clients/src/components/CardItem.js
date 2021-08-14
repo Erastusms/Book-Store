@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios";
+import React from 'react'
 import { Link } from "react-router-dom";
 export default function CardItem(props) {
   const { id, name, price, condition, category, rating, views } = props.item;
   
   return (
     <div className="card-group mt-3">
-      <Link className="text-decoration-none" to={`/products/${id}`}>
+      
         <div className="card">
           <div class="card bg-dark text-white">
+          <Link className="text-decoration-none" to={`/products/${id}`}>
             <img
               src="https://via.placeholder.com/150"
               className="card-img-top rounded"
@@ -17,6 +17,7 @@ export default function CardItem(props) {
             <div class="card-img-overlay p-0 text-start">
               <p className="bg-primary badge">{condition}</p>
             </div>
+            </Link>
           </div>
           <div className="card-body">
             <h5 className="card-title fw-bolde text-dark">{name}</h5>
@@ -61,7 +62,7 @@ export default function CardItem(props) {
             <h4 className="text-white fw-bolder">Rp {price}</h4>
           </div>
         </div>
-      </Link>
+      {/* </Link> */}
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { LandingPage, HomePage } from "pages";
+import { AdminPage, HomePage } from "pages";
 // import { Tooltip, Toast, Popover } from 'bootstrap';
-import { Login, Register, Header, Profile, Cart } from "components";
+import { Login, Register, SideBar } from "components";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import "./App.css";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -26,9 +27,13 @@ function App() {
   return (
     <Router>
       {login ? (
-        // <div className="container">
-          <HomePage login={login} userLogin={userLogin} />
-        // </div>
+        <div className="main-page">
+          <div className="row">
+            <SideBar />
+            {/* <HomePage login={login} userLogin={userLogin} /> */}
+            <AdminPage login={login} userLogin={userLogin} />
+          </div>
+        </div>
       ) : (
         <Switch>
           <Route exact path="/">

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-// import Header from "components/Header";
-import LandingPage from "./LandingPage";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Header, Profile, Cart, Home, Jumbotron, DetailItem, Footer } from "components";
+import { Header, Profile, Cart, Home, Jumbotron, DetailItem, Footer, EditData, EditPassword } from "components";
 export default function HomePage({ login, userLogin }) {
   return (
     <Router>
@@ -14,7 +11,13 @@ export default function HomePage({ login, userLogin }) {
           <Home login={login}/>
         </Route>
         <Route path="/profile">
-          <Profile />
+          <Profile login={login}/>
+        </Route>
+        <Route path="/editData">
+          <EditData />
+        </Route>
+        <Route path="/editPwd">
+          <EditPassword />
         </Route>
         <Route path="/products/:id">
           <DetailItem />
