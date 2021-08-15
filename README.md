@@ -483,13 +483,12 @@ RESTFULL Endpoints
         message : <err>
     }
     ```
-### GET /orders/:id 
+### GET /orders/showById 
 - Request
     - Request Header :
      ```json
     {
-        access_token,
-        id: params.id
+        access_token
     }
     ```
     - Request Body : none
