@@ -14,22 +14,6 @@ class itemController{
         }
     }
 
-    static async showByUser(req,res){
-        try{
-            let UserId = +req.UserData.id;
-            let items = await Line_Item.findAll({
-                where:{UserId}
-            },{
-                order: [
-                    ['id', 'ASC']
-                ]
-            })
-            res.status(200).json(items)
-        }catch(err){
-            res.status(500).json(err)
-        }
-    }
-
     static async showById(req,res){
         try{
             let id = +req.params.id;

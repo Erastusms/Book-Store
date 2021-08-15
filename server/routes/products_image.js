@@ -4,6 +4,7 @@ const {authen} = require('../middlewares/auth')
 const upload = require('../middlewares/multer')
 
 imageRoute.get('/',authen,imageController.show)
+imageRoute.get('/:ProductId',authen,imageController.showByProd)
 imageRoute.post('/create',authen,upload.single('image'),imageController.create)
 imageRoute.put('/update/:id',authen,upload.single('image'),imageController.update)
 imageRoute.delete('/delete/:id',authen,imageController.delete)
