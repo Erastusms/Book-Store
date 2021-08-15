@@ -30,7 +30,7 @@ export default function AddOrder() {
         },
       });
       console.log(result.data);
-      history.push("/cart");
+      history.push("/");
       Swal.fire("Congratulations", "Order has been created", "success");
     } catch (err) {
       Swal.fire("ERROR", `${err}`, "error");
@@ -43,7 +43,7 @@ export default function AddOrder() {
       <div className="row">
         <div className="col-4"></div>
         <div className="col-4 border border-2 p-2 m-4 rounded">
-          <small>Name</small>
+          <label htmlFor="attribute">Name</label>
           <input
             type="text"
             className="form-control"
@@ -51,7 +51,7 @@ export default function AddOrder() {
             name="name"
             onChange={(e) => setState({...state, name: e.target.value })}
           />
-          <small>Subtotal</small>
+          <label htmlFor="attribute">Subtotal</label>
           <input
             type="number"
             className="form-control"
@@ -59,15 +59,16 @@ export default function AddOrder() {
             name="subtotal"
             onChange={(e) => setState({...state, subtotal: e.target.value })}
           />
-          <small>Total Kuantitas</small>
+          <label htmlFor="attribute">Quantity</label>
+          <small className="text-danger"> (Get a discount if you buy more than 2)</small>
           <input
             type="number"
             className="form-control"
-            placeholder="Total Kuantitas"
+            placeholder="Quantity"
             name="total_qty"
             onChange={(e) => setState({...state, total_qty: e.target.value })}
           />
-          <small>City</small>
+          <label htmlFor="attribute">City</label>
           <input
             type="text"
             className="form-control"
@@ -75,11 +76,11 @@ export default function AddOrder() {
             name="city"
             onChange={(e) => setState({...state, city: e.target.value })}
           />
-          <small>Address</small>
+          <label htmlFor="attribute">Address</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Adress"
+            placeholder="Address"
             name="address"
             onChange={(e) => setState({...state, address: e.target.value })}
           />

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Header,
@@ -11,7 +11,11 @@ import {
   EditData,
   EditPassword,
   Checkout,
-  AddCart, Order, AddOrder
+  AddCart,
+  Order,
+  AddOrder,
+  UploadImage,
+  EditCart,
 } from "components";
 export default function HomePage({ login, userLogin }) {
   return (
@@ -31,6 +35,9 @@ export default function HomePage({ login, userLogin }) {
         <Route path="/editPwd">
           <EditPassword />
         </Route>
+        <Route path="/editCarts/:id">
+          <EditCart />
+        </Route>
         <Route path="/checkout/:id">
           <Checkout />
         </Route>
@@ -46,6 +53,9 @@ export default function HomePage({ login, userLogin }) {
         </Route>
         <Route path="/addOrder">
           <AddOrder />
+        </Route>
+        <Route exact path="/uploads">
+          <UploadImage />
         </Route>
       </Switch>
       <Footer />

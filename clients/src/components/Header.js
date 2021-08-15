@@ -50,7 +50,7 @@ export default function Header({ login, userLogin, isAdmin }) {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-blue bg-dark p-2">
+      <nav className="navbar navbar-expand-sm navbar-blue bg-dark p-2">
         <div className="navbar-collapse collapse justify-content-between">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">

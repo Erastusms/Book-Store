@@ -12,6 +12,23 @@ class imageController {
     }
   }
 
+  static async showByProd(req, res) {
+    try {
+      let ProductId = +req.params.ProductId;
+      let images = await Products_Image.findAll(
+        {
+          where: { ProductId },
+        },
+        {
+          order: [["id", "ASC"]],
+        }
+      );
+      res.status(200).json(images);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
   static async create(req, res) {
     try {
       const { primary, ProductId } = req.body;

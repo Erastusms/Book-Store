@@ -31,7 +31,7 @@ export default function Home({ login }) {
   const loadingBar = () => {
     return (
       <div class="d-flex justify-content-center">
-        <div class="spinner-border text-center" role="status">
+        <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -52,15 +52,6 @@ export default function Home({ login }) {
               })}
         </div>
       </div>
-
-      {/* <div className="border p-3 mt-3">
-        <h1 className="text-center">
-          <span className="border-bottom border-3 text-warning">
-            Coming Expired!!!
-          </span>
-        </h1>
-        <CardItem product={itemsData.product} />
-      </div> */}
     </div>
   );
 }

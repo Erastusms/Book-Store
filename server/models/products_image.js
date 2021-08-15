@@ -15,11 +15,46 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Products_Image.init({
-    filename: DataTypes.STRING(100),
-    filesize: DataTypes.STRING(100),
-    filetype: DataTypes.STRING(100),
-    primary: DataTypes.BOOLEAN,
-    ProductId: DataTypes.INTEGER
+    filename: {
+      type: DataTypes.STRING(100),
+      validate:{
+        notEmpty:{
+          message: "filename cannot be empty!"
+        }
+      }
+    },
+    filesize: {
+      type: DataTypes.STRING(100),
+      validate:{
+        notEmpty:{
+          message: "filesize cannot be empty!"
+        }
+      }
+    },
+    filetype: {
+      type: DataTypes.STRING(100),
+      validate:{
+        notEmpty:{
+          message: "filetype cannot be empty!"
+        }
+      }
+    },
+    primary: {
+      type: DataTypes.BOOLEAN,
+      validate:{
+        notEmpty:{
+          message: "primary cannot be empty!"
+        }
+      }
+    },
+    ProductId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "ProductId cannot be empty!"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Products_Image',

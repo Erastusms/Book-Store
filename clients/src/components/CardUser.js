@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import dateFormat from "dateformat";
 export default function CardDetail(props) {
-  const { id, name, email, state, birthdate, gender } = props.user;
+  const { name, email, state, birthdate, gender, avatar } = props.user;
 
   return (
     <div className="container px-4 py-2" style={{ height: "100%" }}>
@@ -12,16 +13,16 @@ export default function CardDetail(props) {
             style={{ width: "300px" }}
           >
             <img
-              src="https://via.placeholder.com/600"
+              src={avatar}
               className="card-img-top rounded"
-              alt="https://via.placeholder.com/600"
+              alt={avatar}
             />
-            <Link to="/update" className="btn btn-primary d-block rounded mt-3">
+            <Link to="/uploads" className="btn btn-primary d-block rounded mt-3">
               Upload Image
             </Link>
           </div>
           <div className="col py-3 my-3 pe-3 me-3">
-            <h4 className="text-white">Biodata Diri</h4>
+            <h4>Biodata Diri</h4>
             <div className="table-responsive-sm">
               <table className="table">
                 <td className="text-muted">
@@ -31,15 +32,15 @@ export default function CardDetail(props) {
                 </td>
                 <td className="text-warning">
                   <tr>{name}</tr>
-                  <tr>{birthdate}</tr>
+                  <tr>{dateFormat(birthdate, "mmmm dS, yyyy")}</tr>
                   <tr>{gender}</tr>
                 </td>
               </table>
             </div>
-            <h4 className="text-white">Kontak</h4>
+            <h4>Contact</h4>
             <div className="table-responsive-sm">
               <table className="table">
-                <td className="text-muted pr-4">
+                <td className="text-muted pe-4">
                   <tr>Email</tr>
                   <tr>State</tr>
                 </td>

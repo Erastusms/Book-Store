@@ -4,7 +4,7 @@ class prodController {
   static async show(req, res) {
     try {
       let products = await Product.findAll({
-        include: [Line_Item],
+        include: [Line_Item, Products_Image],
         order: [["id", "ASC"]],
       });
       res.status(200).json(products);

@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 export default function CardCheckout(props) {
-  const {
-    id,
-    name,
-    desc,
-    price,
-    stock,
-    expire,
-    weight,
-    category,
-    publisher,
-    condition,
-  } = props.item;
+  const { name } = props.item;
 
   return (
     <div className="container px-4 py-5" style={{ height: "100%" }}>
       <h1>
         <span className="border-bottom ms-5">Checkout</span>
       </h1>
-      <div className="card border rounded-2 m-5 p-2" style={{ "max-height": "540px" }}>
+      <div
+        className="card border rounded-2 m-5 p-2"
+        style={{ "max-height": "540px" }}
+      >
         <div className="row">
           {/* <div className="col-1"></div> */}
           <div className="col-auto py-3 ps-3 ms-3 my-3">
@@ -42,10 +32,7 @@ export default function CardCheckout(props) {
                   Buy Now
                 </Link>
                 <div className="vr align-text-bottom mx-2" />
-                <Link
-                  className="card-link text-decoration-none"
-                  to="/delete"
-                >
+                <Link className="card-link text-decoration-none" to="/delete">
                   <img
                     src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
                     alt=""

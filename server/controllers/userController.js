@@ -9,7 +9,7 @@ class userController {
     try {
       let users = await User.findAll({
         order: [["id", "ASC"]],
-        include: [Product, Shopping_Cart, Order],
+        // include: [Product, Shopping_Cart, Order],
       });
       res.status(200).json(users);
     } catch (err) {
@@ -32,7 +32,7 @@ class userController {
 
   static async register(req, res) {
     try {
-      // let avatar = req.file.path;
+      let avatar = req.file.path;
       //   let avatar = "abc";
       const { name, email, password, state, birthdate, gender } = req.body;
       let mail = email.toLowerCase();
@@ -53,7 +53,7 @@ class userController {
           state,
           birthdate,
           gender,
-          // avatar,
+          avatar,
           //   type,
         });
         res.status(201).json(user);
@@ -95,7 +95,7 @@ class userController {
     try {
       let idP = +req.UserData.id;
       let avatar = req.file.path;
-      const { name, email, state, birthdate, gender, type } = req.body;
+      const { name, email, state, birthdate, gender } = req.body;
       let mail = email.toLowerCase();
       let findEmail = await User.findAll({
         where: { id: { [Op.ne]: idP } },
@@ -123,7 +123,7 @@ class userController {
             birthdate,
             gender,
             avatar,
-            type,
+            // type,
           },
           {
             where: { id: idP },
@@ -200,7 +200,7 @@ class userController {
       let avatar = req.file.path;
       console.log(avatar);
       console.log(req.file);
-      let id = +req.params.id;
+      let id = +req.UserData.id;
       let users = await User.update(
         {
           avatar,
@@ -223,49 +223,6 @@ class userController {
         //   type,
       });
       res.status(201).json(user);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-
-  static async addToCheckout(req, res) {
-    try {
-      let UserId = +req.UserData.id;
-      let cart = await Shopping_Cart.create({
-
-      })
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-
-  static async addProduct(req, res) {
-    try {
-      const UserId = +req.UserData.id;
-      const {
-        name,
-        desc,
-        price,
-        stock,
-        expire,
-        weight,
-        category,
-        publisher,
-        condition,
-      } = req.body;
-      let products = await Product.create({
-        name,
-        desc,
-        price,
-        stock,
-        expire,
-        weight,
-        category,
-        publisher,
-        condition,
-        UserId
-      });
-      res.status(200).json(products);
     } catch (err) {
       res.status(500).json(err);
     }

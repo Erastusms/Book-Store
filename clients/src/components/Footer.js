@@ -13,7 +13,15 @@ export default function Footer() {
                   <p>Copyright 2021 &copy; by Erastus & Septian</p>
                 </div>
               </div>
-              <div className="col-2">Logo akun github</div>
+              <div className="col-2">
+                <a href="https://github.com/Erastusms/Book-Store/tree/master">
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/1051/1051326.png"
+                    alt=""
+                    width="20%"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>

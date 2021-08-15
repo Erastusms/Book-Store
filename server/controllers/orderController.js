@@ -16,9 +16,14 @@ class orderController {
   static async showById(req, res) {
     try {
       let UserId = +req.UserData.id;
-      let orders = await Order.findOne({
-        where: { UserId },
-      });
+      let orders = await Order.findAll(
+        {
+          where: { UserId },
+        },
+        {
+          order: [["id", "ASC"]],
+        }
+      );
       res.status(200).json(orders);
     } catch (err) {
       res.status(500).json(err);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
 export default function Register() {
   const history = useHistory();
   const URL = "http://localhost:3000";
@@ -16,22 +15,26 @@ export default function Register() {
   });
 
   const [avatar, setAvatar] = useState("");
+  let data = new FormData();
   const submitHandler = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("avatar", avatar);
-    data.append("name", state.name);
-    data.append("email", state.email);
-    data.append("password", state.password);
-    data.append("state", state.state);
-    data.append("gender", state.gender);
-    data.append("birthdate", state.birthdate);
-    console.log(data)
-    addData(data);
+    console.log(avatar);
+    console.log(state.email);
+
+    console.log(data);
+
+    addData();
   };
 
-  const addData = async (data) => {
+  const addData = async () => {
     try {
+      data.append("avatar", avatar);
+      data.append("name", state.name);
+      data.append("email", state.email);
+      data.append("password", state.password);
+      data.append("state", state.state);
+      data.append("gender", state.gender);
+      data.append("birthdate", state.birthdate);
       const result = await axios({
         method: "POST",
         url: `${URL}/users/register`,
@@ -40,6 +43,7 @@ export default function Register() {
           "Content-Type": "multipart/form-data",
         },
       });
+      // const result = await axios.post("https://jsonplaceholder.typicode.com/users", { data });
       console.log(result.data);
       history.push("/");
       Swal.fire("Congratulations", "Account has been created", "success");
@@ -52,7 +56,7 @@ export default function Register() {
   return (
     <div className="container-fluid">
       <div className="row justify-content-center mt-5 pt-5">
-        <div className="col-sm-4">
+        <div className="col-md-4">
           <div className="shadow border border-2 p-3 rounded">
             <div className="mb-2 text-center">
               <h3>Daftar Sekarang</h3>
@@ -68,6 +72,7 @@ export default function Register() {
                 placeholder="Username"
                 required
                 onChange={(e) => setState({ ...state, name: e.target.value })}
+                // onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -148,8 +153,13 @@ export default function Register() {
               <input
                 type="file"
                 className="form-control"
+                // name="file"
                 name="avatar"
                 onChange={(e) => setAvatar(e.target.files[0])}
+                // onChange={(e) =>
+                //   setState({ ...state, avatar: e.target.files[0] })
+                // }
+                // onChange={onFileChange}
               />
             </div>
             <div className="mb-3 text-center">

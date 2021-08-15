@@ -5,10 +5,9 @@ import { Link, useHistory } from "react-router-dom";
 
 export default function CardCart() {
   const URL = "http://localhost:3000";
-  let history = useHistory()
-  const [carts, setCarts] = useState({});
+  let history = useHistory();
+  const [carts, setCarts] = useState([]);
   useEffect(() => {
-    console.log("use effect jalan");
     getCart();
   }, []);
 
@@ -85,28 +84,32 @@ export default function CardCart() {
             </tr>
           </thead>
           <tbody>
-            {carts.map((cart) => {
-              return (
-                <tr>
-                  <th scope="row">{cart.id}</th>
-                  <td>{cart.status}</td>
-                  <td>
-                    <Link
-                      className="btn btn-primary"
-                      to={`/editCarts/${carts.id}`}
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={(e) => deleteItemHandler(e, carts.id)}
-                      class="btn btn-sm btn-danger"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {carts.length === 0 ? (
+              <h1>Cart is Empty</h1>
+            ) : (
+              carts.map((cart) => {
+                return (
+                  <tr>
+                    <th scope="row">{cart.id}</th>
+                    <td>{cart.status}</td>
+                    <td>
+                      <Link
+                        className="btn btn-sm me-2 btn-primary"
+                        to={`/editCarts/${cart.id}`}
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={(e) => deleteItemHandler(e, cart.id)}
+                        class="btn btn-sm btn-danger"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>

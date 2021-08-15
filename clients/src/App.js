@@ -28,13 +28,13 @@ function App() {
     <Router>
       {login ? (
         <HomePage login={login} userLogin={userLogin} />
+      ) : (
         // <div className="main-page">
         //   <div className="row">
         //     <SideBar />
         //     <AdminPage login={login} userLogin={userLogin} />
         //   </div>
         // </div>
-      ) : (
         <Switch>
           <Route exact path="/">
             <Login login={login} userLogin={userLogin} getToken={getToken} />
@@ -44,14 +44,6 @@ function App() {
           </Route>
         </Switch>
       )}
-      {/* <div className="text-center">
-        <label>Upload file</label>
-        <input type="file" name="file" onChange={(e) => handleFile(e)} />
-        <br />
-        <button className="btn btn-primary" onClick={(e) => handleUpload(e)}>
-          Upload file
-        </button>
-      </div> */}
     </Router>
   );
 }

@@ -13,7 +13,7 @@ export default function Login({ login, userLogin, getToken }) {
     loginAxios();
   };
 
-  const loginAxios = async () => {
+  const loginAxios = async (req, res) => {
     try {
       const result = await axios({
         method: "POST",
@@ -21,11 +21,14 @@ export default function Login({ login, userLogin, getToken }) {
         data: state,
       });
       const access_token = result.data["access_token"];
-      console.log(access_token);
       userLogin(true);
       getToken(access_token);
     } catch (err) {
-      Swal.fire("ERROR", `${err}`, "error");
+      if (err.response.status === 404) {
+        Swal.fire("ERROR", "Username not found", "error");
+      } else {
+        Swal.fire("ERROR", "Password is unvalid", "error");
+      }
     }
   };
 
@@ -50,22 +53,21 @@ export default function Login({ login, userLogin, getToken }) {
               </small>
             </div>
             <div className="mb-3">
-              {/* <label>Email</label> */}
               <input
                 type="email"
                 className="form-control"
                 placeholder="Email"
-                onChange={e => setState({ ...state, email: e.target.value })}
+                onChange={(e) => setState({ ...state, email: e.target.value })}
               />
-              {/* <small>Input email format</small> */}
             </div>
             <div className="mb-3">
-              {/* <label>Password</label> */}
               <input
                 type="password"
                 className="form-control"
                 placeholder="Password"
-                onChange={e => setState({ ...state, password: e.target.value })}
+                onChange={(e) =>
+                  setState({ ...state, password: e.target.value })
+                }
               />
             </div>
             <div className="mb-3 text-center">

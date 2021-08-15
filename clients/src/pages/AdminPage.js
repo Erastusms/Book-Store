@@ -11,7 +11,7 @@ import {
   EditData,
   EditPassword,
   EditProduct,
-  AddProduct,
+  AddProduct, UploadImage
 } from "components";
 import axios from "axios";
 
@@ -42,6 +42,9 @@ export default function AdminPage({ login, userLogin }) {
             </Route>
             <Route exact path="/user">
               <UserForAdmin />
+            </Route>
+            <Route exact path="/uploads">
+              <UploadImage />
             </Route>
           </Switch>
           <Footer />

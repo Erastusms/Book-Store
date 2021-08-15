@@ -1,41 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function EditPassword() {
   const URL = "http://localhost:3000";
   const history = useHistory();
-//   const [password, setPassword] = useState("");
-  const [passwordNew, setPasswordNew] = useState("");
-  const [passwordVer, setPasswordVer] = useState("");
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    console.log("use effect jalan");
-    getPassword();
-  }, []);
-
-  const getPassword = async () => {
-    try {
-      const access_token = localStorage.getItem("access_token");
-      let result = await axios({
-        method: "GET",
-        url: `${URL}/users/profile`,
-        headers: {
-          access_token,
-        },
-      });
-      setUser(result.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [password, setPassword] = useState("");
+  const [newPwd, setPasswordNew] = useState("");
+  const [verPwd, setPasswordVer] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
     let objTemp = {
-      passwordNew,
-      passwordVer,
+      password,
+      newPwd,
+      verPwd,
     };
     updatePassword(objTemp, e);
   };
@@ -43,12 +23,12 @@ export default function EditPassword() {
   const updatePassword = async (userPwd, e) => {
     try {
       const access_token = localStorage.getItem("access_token");
-      const { passwordNew, passwordVer } = userPwd;
-      if (passwordNew === passwordVer) {
+      const { password, newPwd, verPwd } = userPwd;
+      if (newPwd === verPwd) {
         const result = await axios({
           method: "PUT",
           url: `${URL}/users/updatePwd`,
-          data: { password: passwordNew },
+          data: { password, newPwd, verPwd },
           headers: {
             access_token,
           },
@@ -57,7 +37,7 @@ export default function EditPassword() {
         Swal.fire("Congratulations", "Password has been updated", "success");
         history.push("/");
       } else {
-        Swal.fire("Sorry", "Password has invalid", "error");
+        Swal.fire("Sorry", "New Password and Verification not same", "error");
       }
     } catch (err) {
       Swal.fire("ERROR", `${err}`, "error");
@@ -74,10 +54,8 @@ export default function EditPassword() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Username"
-                value={user.password}
-                // onChange={(e) => setPassword(e.target.value)}
-                // onChange={(e) => setUser(user.name, e.target.value)}
+                placeholder="Password Lama"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -87,8 +65,6 @@ export default function EditPassword() {
                 className="form-control"
                 placeholder="New Password"
                 onChange={(e) => setPasswordNew(e.target.value)}
-                // onChange={(e) => setPassword(e.target.value)}
-                // onChange={(e) => setUser(user.name, e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -98,8 +74,6 @@ export default function EditPassword() {
                 className="form-control"
                 placeholder="Verification"
                 onChange={(e) => setPasswordVer(e.target.value)}
-                // onChange={(e) => setPassword(e.target.value)}
-                // onChange={(e) => setUser(user.name, e.target.value)}
               />
             </div>
             <div className="mb-3 text-center">

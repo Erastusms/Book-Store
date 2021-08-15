@@ -98,7 +98,7 @@ export default function ProductsForAdmin({ login, userLogin }) {
                     <td>{item.price}</td>
                     <td>{item.stock}</td>
                     <td>
-                      <Link className="btn btn-primary" to={`/editProducts/${item.id}`}>Edit</Link>
+                      <Link className="btn btn-sm me-2 btn-primary" to={`/editProducts/${item.id}`}>Edit</Link>
                       <button
                         onClick={(e) => deleteItemHandler(e, item.id)}
                         class="btn btn-sm btn-danger"

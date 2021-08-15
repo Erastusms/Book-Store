@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 export default function CardItem(props) {
-  const { id, name, price, condition, category, rating, views } = props.item;
+  const {
+    id,
+    name,
+    price,
+    condition,
+    category,
+    rating,
+    views,
+    Products_Images,
+  } = props.item;
+
+  // const [products, setProducts] = useState([Products_Images]);
 
   return (
     <div className="card-group mt-3">
@@ -9,9 +20,9 @@ export default function CardItem(props) {
         <div class="card bg-dark text-white">
           <Link className="text-decoration-none" to={`/products/${id}`}>
             <img
-              src="https://via.placeholder.com/150"
+              src="https://via.placeholder.com/600"
               className="card-img-top rounded"
-              alt="https://via.placeholder.com/150"
+              alt="https://via.placeholder.com/600"
             />
             <div class="card-img-overlay p-0 text-start">
               <p className="bg-primary badge">{condition}</p>

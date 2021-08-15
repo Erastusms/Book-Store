@@ -26,14 +26,6 @@ export default function Profile({ login }) {
     }
   };
 
-  // return (
-  //   <div className="container-fluid">
-  //     <div className="col">
-  //       {/* <CardUser key={userData.user.id} user={userData.user}  /> */}
-  //       <CardUser key={user.id} user={user} />
-  //     </div>
-  //   </div>
-  // );
   return (
     <div className="container-md-2">
       <CardUser key={user.id} user={user} />

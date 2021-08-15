@@ -101,7 +101,6 @@ export default function UserForAdmin({ login, userLogin }) {
                     <td>{user.birthdate}</td>
                     <td>{user.type}</td>
                     <td>
-                      <Link className="btn btn-primary" to="/editData">Edit</Link>
                       <button
                         onClick={(e) => deleteItemHandler(e, user.id)}
                         class="btn btn-sm btn-danger"
