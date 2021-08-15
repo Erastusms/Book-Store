@@ -28,13 +28,14 @@ function App() {
     <Router>
       {login ? (
         <HomePage login={login} userLogin={userLogin} />
-      ) : (
+
         // <div className="main-page">
         //   <div className="row">
         //     <SideBar />
         //     <AdminPage login={login} userLogin={userLogin} />
         //   </div>
         // </div>
+      ) : (
         <Switch>
           <Route exact path="/">
             <Login login={login} userLogin={userLogin} getToken={getToken} />
