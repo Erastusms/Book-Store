@@ -16,8 +16,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Shopping_Cart.init({
-    status: DataTypes.STRING(15),
-    UserId: DataTypes.INTEGER
+    status: {
+      type: DataTypes.STRING(15),
+      validate:{
+        notEmpty:{
+          message: "status cannot be empty!"
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "UserId cannot be empty!"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Shopping_Cart',

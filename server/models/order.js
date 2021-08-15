@@ -16,17 +16,94 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Order.init({
-    name: DataTypes.STRING(25),
-    subtotal: DataTypes.INTEGER,
-    discount: DataTypes.FLOAT,
-    tax: DataTypes.FLOAT,
-    total_due: DataTypes.FLOAT,
-    total_qty: DataTypes.INTEGER,
-    payt_trx_number: DataTypes.STRING,
-    city: DataTypes.STRING(15),
-    address: DataTypes.STRING(500),
-    status: DataTypes.STRING(15),
-    UserId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING(25),
+      validate:{
+        notEmpty:{
+          message: "name cannot be empty!"
+        }
+      }
+    },
+    subtotal: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "subtotal cannot be empty!"
+        }
+      }
+    },
+    discount: {
+      type: DataTypes.FLOAT,
+      validate:{
+        notEmpty:{
+          message: "discount cannot be empty!"
+        }
+      }
+    },
+    tax: {
+      type: DataTypes.FLOAT,
+      validate:{
+        notEmpty:{
+          message: "tax cannot be empty!"
+        }
+      }
+    },
+    total_due: {
+      type: DataTypes.FLOAT,
+      validate:{
+        notEmpty:{
+          message: "total_due cannot be empty!"
+        }
+      }
+    },
+    total_qty: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "total_qty cannot be empty!"
+        }
+      }
+    },
+    payt_trx_number: {
+      type: DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          message: "payt_trx_number cannot be empty!"
+        }
+      }
+    },
+    city: {
+      type: DataTypes.STRING(15),
+      validate:{
+        notEmpty:{
+          message: "city cannot be empty!"
+        }
+      }
+    },
+    address: {
+      type: DataTypes.STRING(500),
+      validate:{
+        notEmpty:{
+          message: "address cannot be empty!"
+        }
+      }
+    },
+    status: {
+      type: DataTypes.STRING(15),
+      validate:{
+        notEmpty:{
+          message: "status cannot be empty!"
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "UserId cannot be empty!"
+        }
+      }
+    }
   }, {
     hooks:{
       beforeCreate(order,options){

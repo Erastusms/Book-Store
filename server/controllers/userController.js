@@ -19,7 +19,7 @@ class userController{
 
     static async showById(req,res){
         try{
-            let id = +req.params.id;
+            let id = +req.UserData.id;
             let users = await User.findOne({
                 where:{id}
             })
@@ -85,7 +85,7 @@ class userController{
 
     static async update(req,res){
         try{
-        let idP = +req.params.id;
+        let idP = +req.UserData.id;
         let avatar = req.file.path;
         const {name,email,state,birthdate,gender,type} =req.body;
         let mail = email.toLowerCase();
@@ -123,7 +123,7 @@ class userController{
 
     static async updatePwd(req,res){
         try{
-            let id = +req.params.id;
+            let id = +req.UserData.id;
             const {password,newPwd,verPwd}=req.body
             console.log(req.body)
             let user = await User.findOne({
@@ -170,23 +170,6 @@ class userController{
             res.status(404).json({
                 message:"id is not found!"
             })
-        }catch(err){
-            res.status(500).json(err)
-        }
-    }
-
-    static async mult(req,res){
-        try{
-            let avatar = req.file.path;
-            console.log(avatar)
-            console.log(req.file)
-            let id = +req.params.id;
-            let users = await User.update({
-                avatar
-            },{
-                where:{id}
-            })
-            res.status(200).json(users)
         }catch(err){
             res.status(500).json(err)
         }

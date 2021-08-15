@@ -12,21 +12,22 @@ const fileStorage = multer.diskStorage({
   },
 });
 
+
+
+const fileFilter = (req,file,cb) =>{
+  if( file.mimetype ==='image/png'||
+      file.mimetype ==='image/jpg'||
+      file.mimetype ==='image/jpeg'){
+        cb(null,true)
+      }else{
+        cb(null,false)
+      }
+}
+
 const upload = multer({
-  storage: fileStorage
+  storage: fileStorage,
+  fileFilter :fileFilter
 })
-
-// const fileFilter = (req,file,cb) =>{
-//   if( file.mimetype ==='image/png'||
-//       file.mimetype ==='image/jpg'||
-//       file.mimetype ==='image/jpeg'){
-//         cb(null,true)
-//       }else{
-//         cb(null,true)
-//       }
-// }
-
-
 
 
 module.exports = upload;

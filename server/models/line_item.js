@@ -17,12 +17,54 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Line_Item.init({
-    qty: DataTypes.INTEGER,
-    status: DataTypes.STRING(15),
-    ProductId: DataTypes.INTEGER,
-    ShoppingCartId: DataTypes.INTEGER,
-    OrderId: DataTypes.STRING(25),
-    uniqId: DataTypes.STRING(30)
+    qty: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "qty cannot be empty!"
+        }
+      }
+    },
+    status:{
+      type: DataTypes.STRING(15),
+      validate:{
+        notEmpty:{
+          message: "status cannot be empty!"
+        }
+      }
+    },
+    ProductId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "ProductId cannot be empty!"
+        }
+      }
+    },
+    ShoppingCartId:{
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "ShoppingCartId cannot be empty!"
+        }
+      }
+    },
+    OrderId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty:{
+          message: "OrderId cannot be empty!"
+        }
+      }
+    },
+    uniqId:{
+      type: DataTypes.STRING(30),
+      validate:{
+        notEmpty:{
+          message: "uniqId cannot be empty!"
+        }
+      }
+    }
   }, {
     hooks:{
       beforeCreate(item,options){
