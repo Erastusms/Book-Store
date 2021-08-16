@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import {
-  Home,
   Header,
   ProductsForAdmin,
   UserForAdmin,
   Footer,
-  SideBar,
   Profile,
   EditData,
   EditPassword,
@@ -14,6 +12,7 @@ import {
   AddProduct,
   UploadImage,
   AddImage,
+  EditProductImage,
 } from "components";
 import axios from "axios";
 
@@ -44,6 +43,9 @@ export default function AdminPage({ login, userLogin }) {
             </Route>
             <Route path="/editProducts/:id">
               <EditProduct />
+            </Route>
+            <Route path="/editProductsImage/:id">
+              <EditProductImage />
             </Route>
             <Route exact path="/user">
               <UserForAdmin />

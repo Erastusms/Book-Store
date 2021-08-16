@@ -29,8 +29,22 @@ export default function CardItem(props) {
                   className="card-img-top rounded"
                   alt={`http://localhost:3000/assets/images/${image.filename}`}
                 />
+
                 <div class="card-img-overlay p-0 text-start">
-                  <p className="bg-primary badge">{condition}</p>
+                  {/* {condition === "New" ? (
+                    <p className="bg-primary badge">{condition}</p>
+                  ) : (
+                    <p className="bg-danger badge">{condition}</p>
+                  )} */}
+                  <p
+                    className={`${
+                      condition === "New"
+                        ? "bg-primary badge"
+                        : "bg-danger badge"
+                    }`}
+                  >
+                    {condition}
+                  </p>
                 </div>
               </Link>
             );
@@ -76,7 +90,7 @@ export default function CardItem(props) {
           </Link>
         </div>
         <div className="card-footer bg-warning text-center rounded">
-          <h4 className="text-white fw-bolder">Rp {price}</h4>
+          <h4 className="text-white fw-bolder">Rp {price},00</h4>
         </div>
       </div>
     </div>

@@ -81,7 +81,7 @@ export default function ProductsForAdmin({ login, userLogin }) {
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Category</th>
-            <th scope="col">Price</th>
+            <th scope="col">Publisher</th>
             <th scope="col">Stock</th>
             <th scope="col">Action</th>
           </tr>
@@ -95,14 +95,21 @@ export default function ProductsForAdmin({ login, userLogin }) {
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.category}</td>
-                    <td>{item.price}</td>
+                    <td>{item.publisher}</td>
                     <td>{item.stock}</td>
+                    {/* <td>{item.Products_Images[0].filesize}</td> */}
                     <td>
                       <Link
                         className="btn btn-sm me-2 btn-primary"
                         to={`/addImage/${item.id}`}
                       >
                         Add image
+                      </Link>
+                      <Link
+                        className="btn btn-sm me-2 btn-primary"
+                        to={`/editProductsImage/${item.id}`}
+                      >
+                        Edit Image
                       </Link>
                       <Link
                         className="btn btn-sm me-2 btn-primary"

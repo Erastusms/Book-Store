@@ -212,19 +212,6 @@ class userController {
       res.status(500).json(err);
     }
   }
-
-  static async upload(req, res) {
-    try {
-      let avatar = req.file.filename;
-      let user = await User.create({
-        avatar,
-        //   type,
-      });
-      res.status(201).json(user);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
 }
 
 module.exports = userController;

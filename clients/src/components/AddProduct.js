@@ -157,15 +157,20 @@ export default function AddProduct() {
             </div>
             <div className="mb-3">
               <small>Condition</small>
-              <input
-                type="text"
-                className="form-control"
-                name="condition"
-                placeholder="Ex: New or Bekas"
+              <select
+                className="form-select"
+                required
+                aria-label="select example"
                 onChange={(e) =>
                   setState({ ...state, condition: e.target.value })
                 }
-              />
+              >
+                <option disabled selected value>
+                  Choose...
+                </option>
+                <option value="New">New</option>
+                <option value="Bekas">Bekas</option>
+              </select>
             </div>
             <div className="mb-3 text-center">
               <button

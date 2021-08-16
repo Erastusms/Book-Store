@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 export default function CardDetail(props) {
   const {
+    id,
     name,
     desc,
     price,
@@ -24,22 +25,22 @@ export default function CardDetail(props) {
             className="col-auto py-3 ps-3 ms-3 my-3"
             style={{ width: "300px" }}
           >
-            {Products_Images.map((image) => {
-              return (
-                <img
+            {/* {Products_Images.map((image) => {
+              return ( */}
+            {/* <img
                   src={`http://localhost:3000/assets/images/${image.filename}`}
                   className="card-img-top rounded"
                   alt={`http://localhost:3000/assets/images/${image.filename}`}
-                />
-                /* <img
+                /> */}
+            <img
               src="http://via.placeholder.com/150"
               className="card-img-top rounded"
               alt="http://via.placeholder.com/150"
-            /> */
-              );
-            })}
+            />
+            {/* );
+            })} */}
 
-            <Link to="/checkout" className="btn btn-primary d-block">
+            <Link to={`/checkout/${id}`} className="btn btn-primary d-block">
               Buy Now
             </Link>
           </div>
