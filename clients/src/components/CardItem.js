@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 export default function CardItem(props) {
+  const history = useHistory();
+  const URL = "http://localhost:3000";
+
   const {
     id,
     name,
@@ -12,22 +17,24 @@ export default function CardItem(props) {
     Products_Images,
   } = props.item;
 
-  // const [products, setProducts] = useState([Products_Images]);
-
   return (
     <div className="card-group mt-3">
       <div className="card">
         <div class="card bg-dark text-white">
-          <Link className="text-decoration-none" to={`/products/${id}`}>
-            <img
-              src="https://via.placeholder.com/600"
-              className="card-img-top rounded"
-              alt="https://via.placeholder.com/600"
-            />
-            <div class="card-img-overlay p-0 text-start">
-              <p className="bg-primary badge">{condition}</p>
-            </div>
-          </Link>
+          {Products_Images.map((image) => {
+            return (
+              <Link className="text-decoration-none" to={`/products/${id}`}>
+                <img
+                  src={`http://localhost:3000/assets/images/${image.filename}`}
+                  className="card-img-top rounded"
+                  alt={`http://localhost:3000/assets/images/${image.filename}`}
+                />
+                <div class="card-img-overlay p-0 text-start">
+                  <p className="bg-primary badge">{condition}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
         <div className="card-body">
           <h5 className="card-title fw-bolde text-dark">{name}</h5>

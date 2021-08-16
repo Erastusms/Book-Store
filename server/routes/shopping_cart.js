@@ -6,7 +6,7 @@ cartRoute.get("/", authen, cartController.show);
 cartRoute.get("/myCarts", authen, cartController.showByUser);
 cartRoute.get("/:id", authen, cartController.showById);
 cartRoute.post("/create", authen, cartController.create);
-cartRoute.put("/update/:id", authen, cartController.update);
+cartRoute.put("/update/:id", authen, authorCart, cartController.update);
 cartRoute.delete("/delete/:id", authen, authorCart, cartController.delete);
 
 module.exports = cartRoute;

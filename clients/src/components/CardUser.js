@@ -13,11 +13,14 @@ export default function CardDetail(props) {
             style={{ width: "300px" }}
           >
             <img
-              src={avatar}
+              src={`http://localhost:3000/assets/images/${avatar}`}
               className="card-img-top rounded"
-              alt={avatar}
+              alt="gambar"
             />
-            <Link to="/uploads" className="btn btn-primary d-block rounded mt-3">
+            <Link
+              to="/uploads"
+              className="btn btn-primary d-block rounded mt-3"
+            >
               Upload Image
             </Link>
           </div>

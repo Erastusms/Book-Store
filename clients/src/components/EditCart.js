@@ -42,7 +42,7 @@ export default function AddCart() {
       const result = await axios({
         method: "PUT",
         url: `${URL}/carts/update/${id}`,
-        data: status,
+        data: {status},
         headers: {
           access_token,
         },

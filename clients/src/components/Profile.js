@@ -5,7 +5,6 @@ export default function Profile({ login }) {
   const URL = "http://localhost:3000";
   const [user, setUser] = useState({});
   useEffect(() => {
-    console.log("use effect jalan");
     getProfile();
   }, []);
 

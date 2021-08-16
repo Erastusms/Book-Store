@@ -17,7 +17,7 @@ class prodController {
     try {
       let id = +req.params.id;
       let products = await Product.findOne({
-        // include: [Products_Image],
+        include: [Products_Image],
         where: { id },
       });
 
@@ -114,10 +114,13 @@ class prodController {
   static async delete(req, res) {
     try {
       let id = +req.params.id;
+      let images = await Products_Image.destroy({
+        where: { ProductId: id },
+      })
       let products = await Product.destroy({
         where: { id },
       });
-      products === 1
+      products === 1 && images === 1
         ? res.status(200).json({
             message: "data has been delete!",
           })

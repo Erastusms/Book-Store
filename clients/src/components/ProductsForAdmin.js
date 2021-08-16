@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
 export default function ProductsForAdmin({ login, userLogin }) {
   const URL = "http://localhost:3000";
-  let history = useHistory()
+  let history = useHistory();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function ProductsForAdmin({ login, userLogin }) {
         confirmButtonText: "Yes, delete it!",
       });
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "User has been deleted.", "success");
+        Swal.fire("Deleted!", "Product has been deleted.", "success");
 
         await axios({
           method: "DELETE",
@@ -98,7 +98,18 @@ export default function ProductsForAdmin({ login, userLogin }) {
                     <td>{item.price}</td>
                     <td>{item.stock}</td>
                     <td>
-                      <Link className="btn btn-sm me-2 btn-primary" to={`/editProducts/${item.id}`}>Edit</Link>
+                      <Link
+                        className="btn btn-sm me-2 btn-primary"
+                        to={`/addImage/${item.id}`}
+                      >
+                        Add image
+                      </Link>
+                      <Link
+                        className="btn btn-sm me-2 btn-primary"
+                        to={`/editProducts/${item.id}`}
+                      >
+                        Edit
+                      </Link>
                       <button
                         onClick={(e) => deleteItemHandler(e, item.id)}
                         class="btn btn-sm btn-danger"

@@ -80,7 +80,7 @@ export default function EditProduct() {
         <div className="col-sm-4">
           <div className="shadow border border-2 p-3 rounded">
             <div className="mb-3">
-              <small>Username</small>
+              <small>Nama Product</small>
               <input
                 type="text"
                 className="form-control"

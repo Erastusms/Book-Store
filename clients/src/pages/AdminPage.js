@@ -11,7 +11,9 @@ import {
   EditData,
   EditPassword,
   EditProduct,
-  AddProduct, UploadImage
+  AddProduct,
+  UploadImage,
+  AddImage,
 } from "components";
 import axios from "axios";
 
@@ -36,6 +38,9 @@ export default function AdminPage({ login, userLogin }) {
             </Route>
             <Route exact path="/addProducts">
               <AddProduct />
+            </Route>
+            <Route exact path="/addImage/:id">
+              <AddImage />
             </Route>
             <Route path="/editProducts/:id">
               <EditProduct />

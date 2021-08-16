@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function AddProduct({ login, userLogin }) {
+export default function AddProduct() {
   const history = useHistory();
   const URL = "http://localhost:3000";
   const [state, setState] = useState({
@@ -21,6 +21,7 @@ export default function AddProduct({ login, userLogin }) {
   const submitHandler = (e) => {
     e.preventDefault();
     addData();
+    // addImage();
   };
 
   const addData = async () => {
@@ -43,6 +44,28 @@ export default function AddProduct({ login, userLogin }) {
     }
   };
 
+  // const [image, setImage] = useState("");
+
+  // const addImage = async () => {
+  //   try {
+  //     const access_token = localStorage.getItem("access_token");
+  //     const result = await axios({
+  //       method: "POST",
+  //       url: `${URL}/images/create`,
+  //       data: { primary, ProductId:  },
+  //       headers: {
+  //         access_token,
+  //       },
+  //     });
+  //     console.log(result.data);
+  //     history.push("/");
+  //     Swal.fire("Congratulations", "Product has been created", "success");
+  //   } catch (err) {
+  //     Swal.fire("ERROR", `${err}`, "error");
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="container-fluid">
       <div className="row mb-2">
@@ -63,7 +86,7 @@ export default function AddProduct({ login, userLogin }) {
               <textarea
                 type="text"
                 className="form-control"
-                style={{height: "200px"}}
+                style={{ height: "200px" }}
                 placeholder="Description about your book"
                 name="desc"
                 onChange={(e) => setState({ ...state, desc: e.target.value })}

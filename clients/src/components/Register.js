@@ -15,19 +15,14 @@ export default function Register() {
   });
 
   const [avatar, setAvatar] = useState("");
-  let data = new FormData();
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(avatar);
-    console.log(state.email);
-
-    console.log(data);
-
     addData();
   };
 
   const addData = async () => {
     try {
+      let data = new FormData();
       data.append("avatar", avatar);
       data.append("name", state.name);
       data.append("email", state.email);
@@ -43,7 +38,6 @@ export default function Register() {
           "Content-Type": "multipart/form-data",
         },
       });
-      // const result = await axios.post("https://jsonplaceholder.typicode.com/users", { data });
       console.log(result.data);
       history.push("/");
       Swal.fire("Congratulations", "Account has been created", "success");
@@ -72,7 +66,6 @@ export default function Register() {
                 placeholder="Username"
                 required
                 onChange={(e) => setState({ ...state, name: e.target.value })}
-                // onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -153,13 +146,8 @@ export default function Register() {
               <input
                 type="file"
                 className="form-control"
-                // name="file"
                 name="avatar"
                 onChange={(e) => setAvatar(e.target.files[0])}
-                // onChange={(e) =>
-                //   setState({ ...state, avatar: e.target.files[0] })
-                // }
-                // onChange={onFileChange}
               />
             </div>
             <div className="mb-3 text-center">

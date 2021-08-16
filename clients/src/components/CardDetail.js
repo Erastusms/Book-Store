@@ -13,22 +13,37 @@ export default function CardDetail(props) {
     condition,
     total_sold,
     rating,
+    Products_Images,
   } = props.item;
 
   return (
     <div className="container px-4 py-2" style={{ height: "100%" }}>
       <div className="card border m-5 p-2">
         <div className="row">
-          <div className="col-auto py-3 ps-3 ms-3 my-3" style={{"width": "300px"}}>
-            <img
-              src="https://via.placeholder.com/600"
-              className="card-img-top rounded-top"
-              alt="https://via.placeholder.com/600"
-            />
+          <div
+            className="col-auto py-3 ps-3 ms-3 my-3"
+            style={{ width: "300px" }}
+          >
+            {Products_Images.map((image) => {
+              return (
+                <img
+                  src={`http://localhost:3000/assets/images/${image.filename}`}
+                  className="card-img-top rounded"
+                  alt={`http://localhost:3000/assets/images/${image.filename}`}
+                />
+                /* <img
+              src="http://via.placeholder.com/150"
+              className="card-img-top rounded"
+              alt="http://via.placeholder.com/150"
+            /> */
+              );
+            })}
+
             <Link to="/checkout" className="btn btn-primary d-block">
               Buy Now
             </Link>
           </div>
+
           <div className="col py-3 my-3 pe-3 me-3">
             <h1 className="fs-3">{name}</h1>
             <p className="p-0  m-0 text-muted">{publisher}</p>

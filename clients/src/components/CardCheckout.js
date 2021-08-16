@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 export default function CardCheckout(props) {
-  const { name } = props.item;
+  const { name, condition, price } = props.item;
 
   return (
     <div className="container px-4 py-5" style={{ height: "100%" }}>
@@ -13,7 +13,6 @@ export default function CardCheckout(props) {
         style={{ "max-height": "540px" }}
       >
         <div className="row">
-          {/* <div className="col-1"></div> */}
           <div className="col-auto py-3 ps-3 ms-3 my-3">
             <img
               src="https://via.placeholder.com/150"
@@ -41,8 +40,8 @@ export default function CardCheckout(props) {
                 </Link>
               </div>
             </div>
-            <h6 className="bg-warning rounded p-2 d-inline">Status</h6>
-            <p className="footer pt-4">Created on</p>
+            <h6 className="bg-warning rounded p-2 d-inline">{condition}</h6>
+            <p className="footer pt-4">Rp.{price}</p>
           </div>
         </div>
       </div>
