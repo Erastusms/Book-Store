@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -49,7 +49,7 @@ export default function AddOrder() {
             className="form-control"
             placeholder="Name"
             name="name"
-            onChange={(e) => setState({...state, name: e.target.value })}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
           />
           <label htmlFor="attribute">Subtotal</label>
           <input
@@ -57,16 +57,19 @@ export default function AddOrder() {
             className="form-control"
             placeholder="Subtotal"
             name="subtotal"
-            onChange={(e) => setState({...state, subtotal: e.target.value })}
+            onChange={(e) => setState({ ...state, subtotal: e.target.value })}
           />
           <label htmlFor="attribute">Quantity</label>
-          <small className="text-danger"> (Get a discount if you buy more than 2)</small>
+          <small className="text-danger">
+            {" "}
+            (Get a discount if you buy more than 2)
+          </small>
           <input
             type="number"
             className="form-control"
             placeholder="Quantity"
             name="total_qty"
-            onChange={(e) => setState({...state, total_qty: e.target.value })}
+            onChange={(e) => setState({ ...state, total_qty: e.target.value })}
           />
           <label htmlFor="attribute">City</label>
           <input
@@ -74,7 +77,7 @@ export default function AddOrder() {
             className="form-control"
             placeholder="City"
             name="city"
-            onChange={(e) => setState({...state, city: e.target.value })}
+            onChange={(e) => setState({ ...state, city: e.target.value })}
           />
           <label htmlFor="attribute">Address</label>
           <input
@@ -82,7 +85,7 @@ export default function AddOrder() {
             className="form-control"
             placeholder="Address"
             name="address"
-            onChange={(e) => setState({...state, address: e.target.value })}
+            onChange={(e) => setState({ ...state, address: e.target.value })}
           />
           <div className="my-3 text-center">
             <button

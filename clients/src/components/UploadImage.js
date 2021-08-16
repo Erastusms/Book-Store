@@ -18,7 +18,7 @@ function UploadImage() {
     console.log(formData);
     try {
       const access_token = localStorage.getItem("access_token");
-      const res = await axios({
+      await axios({
         method: "PUT",
         url: "http://localhost:3000/users/uploads",
         data: formData,

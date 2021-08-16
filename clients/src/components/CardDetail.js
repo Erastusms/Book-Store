@@ -64,7 +64,7 @@ export default function CardDetail(props) {
                 </small>
               </div>
             </div>
-            <h1 className="fw-bolder pb-2">Rp.{price}</h1>
+            <h1 className="fw-bolder pb-2">Rp.{price},00</h1>
             <p className="border-bottom border-top border-2 ps-3 text-primary">
               Detail
             </p>

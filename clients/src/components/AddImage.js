@@ -24,7 +24,7 @@ export default function AddImage() {
     console.log(formData);
     try {
       const access_token = localStorage.getItem("access_token");
-      const res = await axios({
+      await axios({
         method: "POST",
         url: "http://localhost:3000/images/create",
         data: formData,

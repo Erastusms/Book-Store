@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -54,7 +54,7 @@ export default function EditProduct() {
     try {
       const access_token = localStorage.getItem("access_token");
       const { name, category, price, stock } = user;
-      const result = await axios({
+      await axios({
         method: "PUT",
         url: `${URL}/products/update/${id}`,
         data: {

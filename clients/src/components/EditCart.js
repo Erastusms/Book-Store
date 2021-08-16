@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -42,7 +42,7 @@ export default function AddCart() {
       const result = await axios({
         method: "PUT",
         url: `${URL}/carts/update/${id}`,
-        data: {status},
+        data: { status },
         headers: {
           access_token,
         },

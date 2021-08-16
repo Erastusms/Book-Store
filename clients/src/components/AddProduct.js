@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -21,7 +21,6 @@ export default function AddProduct() {
   const submitHandler = (e) => {
     e.preventDefault();
     addData();
-    // addImage();
   };
 
   const addData = async () => {
@@ -43,28 +42,6 @@ export default function AddProduct() {
       console.log(err);
     }
   };
-
-  // const [image, setImage] = useState("");
-
-  // const addImage = async () => {
-  //   try {
-  //     const access_token = localStorage.getItem("access_token");
-  //     const result = await axios({
-  //       method: "POST",
-  //       url: `${URL}/images/create`,
-  //       data: { primary, ProductId:  },
-  //       headers: {
-  //         access_token,
-  //       },
-  //     });
-  //     console.log(result.data);
-  //     history.push("/");
-  //     Swal.fire("Congratulations", "Product has been created", "success");
-  //   } catch (err) {
-  //     Swal.fire("ERROR", `${err}`, "error");
-  //     console.log(err);
-  //   }
-  // };
 
   return (
     <div className="container-fluid">

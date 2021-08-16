@@ -1,11 +1,6 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
-import Swal from "sweetalert2";
+import React from "react";
+import { Link } from "react-router-dom";
 export default function CardItem(props) {
-  const history = useHistory();
-  const URL = "http://localhost:3000";
-
   const {
     id,
     name,
@@ -29,13 +24,7 @@ export default function CardItem(props) {
                   className="card-img-top rounded"
                   alt={`http://localhost:3000/assets/images/${image.filename}`}
                 />
-
                 <div class="card-img-overlay p-0 text-start">
-                  {/* {condition === "New" ? (
-                    <p className="bg-primary badge">{condition}</p>
-                  ) : (
-                    <p className="bg-danger badge">{condition}</p>
-                  )} */}
                   <p
                     className={`${
                       condition === "New"

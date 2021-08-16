@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-export default function UserForAdmin({ login, userLogin }) {
+export default function UserForAdmin() {
   const URL = "http://localhost:3000";
   const history = useHistory();
   const [users, setUsers] = useState([]);

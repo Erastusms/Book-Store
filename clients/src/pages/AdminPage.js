@@ -14,7 +14,6 @@ import {
   AddImage,
   EditProductImage,
 } from "components";
-import axios from "axios";
 
 export default function AdminPage({ login, userLogin }) {
   return (
