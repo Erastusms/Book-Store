@@ -3,9 +3,10 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors')
+const path = require('path')
 
 
-
+app.use('/assets/images', express.static(path.join(__dirname,'/assets/images')))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
 app.use(cors())
