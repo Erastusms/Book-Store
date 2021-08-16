@@ -31,7 +31,7 @@ class userController{
 
     static async register(req,res){
         try{
-            let avatar = req.file.path;
+            let avatar = req.file.filename;
             const {name,email,password,state,birthdate,gender,type} =req.body
             let mail = email.toLowerCase();
             let findEmail = await User.findOne({
@@ -86,7 +86,7 @@ class userController{
     static async update(req,res){
         try{
         let idP = +req.UserData.id;
-        let avatar = req.file.path;
+        let avatar = req.file.filename;
         const {name,email,state,birthdate,gender,type} =req.body;
         let mail = email.toLowerCase();
         let findEmail = await User.findAll({
