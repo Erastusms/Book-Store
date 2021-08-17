@@ -3,12 +3,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
 import dateFormat from "dateformat";
+import Fade from "react-reveal/Fade";
+
 export default function CardOrder() {
   const URL = "http://localhost:3000";
   let history = useHistory();
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    console.log("use effect jalan");
     getOrder();
   }, []);
 
@@ -74,67 +75,71 @@ export default function CardOrder() {
       >
         Add New Order
       </Link>
-      {orders.length === 0 ? (
-        <h1 className="mx-5 mt-3">Order is Empty</h1>
-      ) : (
-        orders.map((order) => {
+      {orders.length ? (
+        orders.map((order, index) => {
           return (
-            <div className="card-group mx-5 my-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-8">
-                      <small className="text-muted">
-                        order #{order.payt_trx_number}
-                      </small>
-                      <h2>{order.name}</h2>
-                      <p>Jumlah barang yang dibeli: {order.total_qty}</p>
-                      <p className="bg-success badge py-2">{order.status}</p>
-                      <p className="text-muted small">
-                        From: {order.address}, {order.city}
-                      </p>
-                    </div>
-                    <div className="col-2 pt-5">
-                      <p>Harga Barang</p>
-                      <p>Discount</p>
-                      <p>Tax(10%)</p>
-                    </div>
-                    <div className="col-2">
-                      <p className="text-end">
-                        <button onClick={(e) => deleteItemHandler(e, order.id)}>
-                          <img
-                            src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
-                            alt=""
-                            width="20px"
-                          />
-                        </button>
-                      </p>
-                      <p className="text-warning pt-2">
-                        Rp.{order.subtotal},00
-                      </p>
-                      <p className="text-warning">Rp.{order.discount},00</p>
-                      <p className="text-warning">Rp.{order.tax},00</p>
+            <Fade bottom delay={200 * index}>
+              <div className="card-group mx-5 my-4">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-8">
+                        <small className="text-muted">
+                          order #{order.payt_trx_number}
+                        </small>
+                        <h2>{order.name}</h2>
+                        <p>Jumlah barang yang dibeli: {order.total_qty}</p>
+                        <p className="bg-success badge py-2">{order.status}</p>
+                        <p className="text-muted small">
+                          From: {order.address}, {order.city}
+                        </p>
+                      </div>
+                      <div className="col-2 pt-5">
+                        <p>Harga Barang</p>
+                        <p>Discount</p>
+                        <p>Tax(10%)</p>
+                      </div>
+                      <div className="col-2">
+                        <p className="text-end">
+                          <button
+                            onClick={(e) => deleteItemHandler(e, order.id)}
+                          >
+                            <img
+                              src="https://image.flaticon.com/icons/png/512/1214/1214428.png"
+                              alt=""
+                              width="20px"
+                            />
+                          </button>
+                        </p>
+                        <p className="text-warning pt-2">
+                          Rp.{order.subtotal},00
+                        </p>
+                        <p className="text-warning">Rp.{order.discount},00</p>
+                        <p className="text-warning">Rp.{order.tax},00</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="card-footer">
-                  <div className="row">
-                    <div className="col-8">
-                      <p>Total Order</p>
-                      <p className="text-muted small">
-                        Order created on:{" "}
-                        {dateFormat(order.createdAt, "mmmm dS, yyyy")}
-                      </p>
-                    </div>
-                    <div className="col-4 text-end text-warning fs-2">
-                      <p>Rp.{order.total_due},00</p>
+                  <div className="card-footer">
+                    <div className="row">
+                      <div className="col-8">
+                        <p>Total Order</p>
+                        <p className="text-muted small">
+                          Order created on:{" "}
+                          {dateFormat(order.createdAt, "mmmm dS, yyyy")}
+                        </p>
+                      </div>
+                      <div className="col-4 text-end text-warning fs-2">
+                        <p>Rp.{order.total_due},00</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Fade>
           );
         })
+      ) : (
+        <h1 className="ms-5 mt-2">Your Order Is Empty</h1>
       )}
     </div>
   );

@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 export default function ProductsForAdmin({ login, userLogin }) {
   const URL = "http://localhost:3000";
   let history = useHistory();
+  let number = 1;
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function ProductsForAdmin({ login, userLogin }) {
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Id</th>
+            <th scope="col">No.</th>
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Publisher</th>
@@ -92,7 +93,7 @@ export default function ProductsForAdmin({ login, userLogin }) {
             : items.map((item) => {
                 return (
                   <tr>
-                    <td>{item.id}</td>
+                    <td>{number++}</td>
                     <td>{item.name}</td>
                     <td>{item.category}</td>
                     <td>{item.publisher}</td>
@@ -106,13 +107,13 @@ export default function ProductsForAdmin({ login, userLogin }) {
                         Add image
                       </Link>
                       <Link
-                        className="btn btn-sm me-2 btn-primary"
+                        className="btn btn-sm me-2 btn-warning"
                         to={`/editProductsImage/${item.id}`}
                       >
                         Edit Image
                       </Link>
                       <Link
-                        className="btn btn-sm me-2 btn-primary"
+                        className="btn btn-sm me-2 btn-warning"
                         to={`/editProducts/${item.id}`}
                       >
                         Edit

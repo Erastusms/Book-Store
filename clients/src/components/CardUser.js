@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
+import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
 export default function CardDetail(props) {
   const { name, email, state, birthdate, gender, avatar } = props.user;
 
@@ -12,11 +14,13 @@ export default function CardDetail(props) {
             className="col-auto py-3 ps-3 ms-3 my-3"
             style={{ width: "300px" }}
           >
-            <img
-              src={`http://localhost:3000/assets/images/${avatar}`}
-              className="card-img-top rounded"
-              alt="gambar"
-            />
+            <Zoom>
+              <img
+                src={`http://localhost:3000/assets/images/${avatar}`}
+                className="card-img-top rounded"
+                alt="gambar"
+              />
+            </Zoom>
             <Link
               to="/uploads"
               className="btn btn-primary d-block rounded mt-3"
@@ -33,11 +37,13 @@ export default function CardDetail(props) {
                   <tr>Birthdate</tr>
                   <tr>Gender</tr>
                 </td>
-                <td className="text-warning">
-                  <tr>{name}</tr>
-                  <tr>{dateFormat(birthdate, "mmmm dS, yyyy")}</tr>
-                  <tr>{gender}</tr>
-                </td>
+                <Fade left>
+                  <td className="text-warning">
+                    <tr>{name}</tr>
+                    <tr>{dateFormat(birthdate, "mmmm dS, yyyy")}</tr>
+                    <tr>{gender}</tr>
+                  </td>
+                </Fade>
               </table>
             </div>
             <h4>Contact</h4>
@@ -47,10 +53,12 @@ export default function CardDetail(props) {
                   <tr>Email</tr>
                   <tr>State</tr>
                 </td>
-                <td className="text-warning">
-                  <tr>{email}</tr>
-                  <tr>{state}</tr>
-                </td>
+                <Fade left>
+                  <td className="text-warning">
+                    <tr>{email}</tr>
+                    <tr>{state}</tr>
+                  </td>
+                </Fade>
               </table>
             </div>
             <Link

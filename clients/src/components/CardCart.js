@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
+import Fade from "react-reveal/Fade";
 
 export default function CardCart() {
   const URL = "http://localhost:3000";
   let history = useHistory();
+  let number = 1;
   const [carts, setCarts] = useState([]);
   useEffect(() => {
     getCart();
@@ -78,37 +80,39 @@ export default function CardCart() {
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">No.</th>
               <th scope="col">Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {carts.length === 0 ? (
-              <h1>Cart is Empty</h1>
-            ) : (
-              carts.map((cart) => {
+            {carts.length ? (
+              carts.map((cart, index) => {
                 return (
-                  <tr>
-                    <th scope="row">{cart.id}</th>
-                    <td>{cart.status}</td>
-                    <td>
-                      <Link
-                        className="btn btn-sm me-2 btn-primary"
-                        to={`/editCarts/${cart.id}`}
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={(e) => deleteItemHandler(e, cart.id)}
-                        class="btn btn-sm btn-danger"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+                  <Fade bottom delay={200 * index}>
+                    <tr>
+                      <th scope="row">{number++}</th>
+                      <td>{cart.status}</td>
+                      <td>
+                        <Link
+                          className="btn btn-sm me-2 btn-warning"
+                          to={`/editCarts/${cart.id}`}
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={(e) => deleteItemHandler(e, cart.id)}
+                          class="btn btn-sm btn-danger"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </Fade>
                 );
               })
+            ) : (
+              <h1>Cart is Empty</h1>
             )}
           </tbody>
         </table>
