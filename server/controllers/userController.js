@@ -9,7 +9,7 @@ class userController {
     try {
       let users = await User.findAll({
         order: [["id", "ASC"]],
-        // include: [Product, Shopping_Cart, Order],
+        include: [Product, Shopping_Cart, Order],
       });
       res.status(200).json(users);
     } catch (err) {
@@ -32,7 +32,7 @@ class userController {
 
   static async register(req, res) {
     try {
-      let avatar = req.file.path;
+      let avatar = req.file.filename;
       //   let avatar = "abc";
       const { name, email, password, state, birthdate, gender } = req.body;
       let mail = email.toLowerCase();
@@ -94,7 +94,7 @@ class userController {
   static async update(req, res) {
     try {
       let idP = +req.UserData.id;
-      let avatar = req.file.path;
+
       const { name, email, state, birthdate, gender } = req.body;
       let mail = email.toLowerCase();
       let findEmail = await User.findAll({
@@ -122,8 +122,6 @@ class userController {
             state,
             birthdate,
             gender,
-            avatar,
-            // type,
           },
           {
             where: { id: idP },
@@ -197,7 +195,7 @@ class userController {
 
   static async mult(req, res) {
     try {
-      let avatar = req.file.path;
+      let avatar = req.file.filename;
       console.log(avatar);
       console.log(req.file);
       let id = +req.UserData.id;
@@ -210,19 +208,6 @@ class userController {
         }
       );
       res.status(200).json(users);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-
-  static async upload(req, res) {
-    try {
-      let avatar = req.file.path;
-      let user = await User.create({
-        avatar,
-        //   type,
-      });
-      res.status(201).json(user);
     } catch (err) {
       res.status(500).json(err);
     }

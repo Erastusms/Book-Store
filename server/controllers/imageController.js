@@ -65,7 +65,7 @@ class imageController {
           ProductId,
         },
         {
-          where: { id },
+          where: { ProductId: id },
         }
       );
       images[0] === 1

@@ -6,7 +6,7 @@ import axios from "axios";
 export default function DetailItem() {
   const params = useParams();
   const id = +params.id;
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState([]);
   const URL = "http://localhost:3000";
   useEffect(() => {
     getItemById();

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function AddProduct({ login, userLogin }) {
+export default function AddProduct() {
   const history = useHistory();
   const URL = "http://localhost:3000";
   const [state, setState] = useState({
@@ -63,7 +63,7 @@ export default function AddProduct({ login, userLogin }) {
               <textarea
                 type="text"
                 className="form-control"
-                style={{height: "200px"}}
+                style={{ height: "200px" }}
                 placeholder="Description about your book"
                 name="desc"
                 onChange={(e) => setState({ ...state, desc: e.target.value })}
@@ -134,15 +134,20 @@ export default function AddProduct({ login, userLogin }) {
             </div>
             <div className="mb-3">
               <small>Condition</small>
-              <input
-                type="text"
-                className="form-control"
-                name="condition"
-                placeholder="Ex: New or Bekas"
+              <select
+                className="form-select"
+                required
+                aria-label="select example"
                 onChange={(e) =>
                   setState({ ...state, condition: e.target.value })
                 }
-              />
+              >
+                <option disabled selected value>
+                  Choose...
+                </option>
+                <option value="New">New</option>
+                <option value="Bekas">Bekas</option>
+              </select>
             </div>
             <div className="mb-3 text-center">
               <button

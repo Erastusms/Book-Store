@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import {
-  Home,
   Header,
   ProductsForAdmin,
   UserForAdmin,
   Footer,
-  SideBar,
   Profile,
   EditData,
   EditPassword,
   EditProduct,
-  AddProduct, UploadImage
+  AddProduct,
+  UploadImage,
+  AddImage,
+  EditProductImage,
 } from "components";
-import axios from "axios";
 
 export default function AdminPage({ login, userLogin }) {
   return (
@@ -37,8 +37,14 @@ export default function AdminPage({ login, userLogin }) {
             <Route exact path="/addProducts">
               <AddProduct />
             </Route>
+            <Route exact path="/addImage/:id">
+              <AddImage />
+            </Route>
             <Route path="/editProducts/:id">
               <EditProduct />
+            </Route>
+            <Route path="/editProductsImage/:id">
+              <EditProductImage />
             </Route>
             <Route exact path="/user">
               <UserForAdmin />
